@@ -73,3 +73,4 @@ class Registry():
 
 
 CAPTION_MODEL_REGISTRY = Registry('CaptionModel')
+GENERATOR_REGISTRY = Registry('Generator')
