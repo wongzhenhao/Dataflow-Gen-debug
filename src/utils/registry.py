@@ -72,5 +72,5 @@ class Registry():
         return self._obj_map.keys()
 
 
-CAPTION_MODEL_REGISTRY = Registry('CaptionModel')
+CAPTIONER_REGISTRY = Registry('Captioner')
 GENERATOR_REGISTRY = Registry('Generator')

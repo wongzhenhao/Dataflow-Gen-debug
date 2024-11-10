@@ -2,9 +2,9 @@ import logging
 from vllm import LLM, SamplingParams
 from PIL import Image
 
-from src.utils.registry import CAPTION_MODEL_REGISTRY
+from src.utils.registry import CAPTIONER_REGISTRY
 
-@CAPTION_MODEL_REGISTRY.register()
+@CAPTIONER_REGISTRY.register()
 class MLLamaCaptioner:
     def __init__(self, 
                 model_path: str = "meta-llama/Llama-3.2-11B-Vision-Instruct", 

@@ -2,9 +2,9 @@ import logging
 from vllm import LLM, SamplingParams
 from PIL import Image
 
-from src.utils.registry import CAPTION_MODEL_REGISTRY
+from src.utils.registry import CAPTIONER_REGISTRY
 
-@CAPTION_MODEL_REGISTRY.register()
+@CAPTIONER_REGISTRY.register()
 class LLaVANeXTCaptioner:
     def __init__(self, 
                 model_path: str = "llava-hf/llava-v1.6-mistral-7b-hf", 

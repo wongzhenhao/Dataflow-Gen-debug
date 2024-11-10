@@ -2,9 +2,9 @@ import logging
 from vllm import LLM, SamplingParams
 from PIL import Image
 
-from src.utils.registry import CAPTION_MODEL_REGISTRY
+from src.utils.registry import CAPTIONER_REGISTRY
 
-@CAPTION_MODEL_REGISTRY.register()
+@CAPTIONER_REGISTRY.register()
 class Phi3VCaptioner:
     def __init__(self, 
                 model_path: str = "microsoft/Phi-3-vision-128k-instruct", 
