@@ -48,7 +48,7 @@ class GeneratorRecorder():
         self.save_folder = save_folder
 
     def save(self, content, content_path):
-        if "jpg" or "png" in content_path:
+        if "jpg" in content_path or "png" in content_path:
             content.save(content_path)
         elif "gif" in content_path:
             export_to_gif(content, content_path)
@@ -60,8 +60,8 @@ class GeneratorRecorder():
         os.makedirs(save_dir, exist_ok=True)
         for content, content_path in zip(contents, contents_path):
             save_path = os.path.join(save_dir, content_path)
-            save_dir = os.path.dirname(save_path)
-            os.makedirs(save_dir, exist_ok=True)
+            base_dir = os.path.dirname(save_path)
+            os.makedirs(base_dir, exist_ok=True)
             self.save(content, save_path)
 
     def dump(self):

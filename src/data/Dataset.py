@@ -103,4 +103,4 @@ class VideoGeneratorDataset(DataFlowDataset):
         return len(self.prompts_data)
 
     def __getitem__(self, idx):
-        return self.prompts_data[idx]['text'], self.prompts_data[idx]['video']
+        return self.prompts_data[idx]

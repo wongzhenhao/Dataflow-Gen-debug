@@ -124,5 +124,8 @@ class VideoGeneratorWrapper:
         return videos
     
     def collate_fn(self, batch):
-        videos = [prompt for prompt, _ in batch], [path for _, path in batch]
-        return videos
+        videos = [item['video'] for item in batch]
+        prompts = [{'text_prompt':item['text']} for item in batch]
+        if 'image_path'in batch[0]:
+            prompts = [{'text_prompt':item['text'],'image_prompt':item['image_path']} for item in batch]
+        return prompts, videos
