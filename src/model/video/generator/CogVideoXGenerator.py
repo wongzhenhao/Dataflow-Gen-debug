@@ -8,6 +8,10 @@ from diffusers.utils import export_to_video, load_image
 class CogVideoXGenerator:
     def __init__(self,
                 model_path: str="THUDM/CogVideoX-5b-I2V",
+                num_videos_per_prompt=1,
+                num_inference_steps=50,
+                num_frames=49,
+                guidance_scale=6,
                 **kwargs):
         
         logging.info(f"model CogVideoXGenerator will initialize with model_path: {model_path}")
@@ -17,33 +21,23 @@ class CogVideoXGenerator:
         )
         self.pipeline.vae.enable_tiling()
         self.pipeline.vae.enable_slicing()
+        self.num_videos_per_prompt = 1
+        self.num_inference_steps = 50
+        self.num_frames = 49
+        self.guidance_scale = 6
 
     def generate_batch(self,
                     prompts):
-
-        outputs = [self.generate_video(prompt) for prompt in prompts]
-        return outputs  
-    
-    def generate_video(self,
-                    prompt,
-                    num_videos_per_prompt=1,
-                    num_inference_steps=50,
-                    num_frames=49,
-                    guidance_scale=6,
-                    seed: int=42
-                    ):
-        image = load_image(image=prompt['image_path'])
-
-        output = self.pipeline(
-            prompt=prompt['prompt'],
-            image=image,
-            num_videos_per_prompt=num_videos_per_prompt,
-            num_inference_steps=num_inference_steps,
-            num_frames=num_frames,
-            guidance_scale=guidance_scale,
-            generator=torch.Generator(device="cpu").manual_seed(seed),
-        )     
-        frames = output.frames[0]
-        export_to_video(frames, 'cogvideo.mp4', fps=8)
-        return {"id": prompt["id"], "output": output}
-    
+        outputs = []
+        for prompt in prompts:
+            video = self.pipeline(
+                prompt = prompt['text_prompt'],
+                image = load_image(image=prompt['image_prompt'],
+                num_videos_per_prompt=self.num_videos_per_prompt,
+                num_inference_steps=self.num_inference_steps,
+                num_frames=self.num_frames,
+                guidance_scale=self.guidance_scale,
+                generator=torch.Generator(device="cpu").manual_seed(42)
+            ).frames[0]
+            outputs.append(video)
+        return outputs
