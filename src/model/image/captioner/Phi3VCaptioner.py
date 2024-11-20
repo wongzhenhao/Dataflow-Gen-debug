@@ -30,13 +30,20 @@ class Phi3VCaptioner:
         self.prompt = "<|user|>\n<|image_1|>\n" + prompt + "<|end|>\n<|assistant|>\n"
 
 
+    def encode_images(self, image_path):
+        if not os.path.exists(image_path):
+            raise FileNotFoundError(f"Image file not found: {image_path}")
+        image = Image.open(image_path).convert('RGB')
+        return image
+
+
     def generate_batch(self, images):
         inputs, outputs = [], []
         for image in images:
             inputs.append({
                 "prompt": self.prompt,
                 "multi_modal_data": {
-                    "image": image
+                    "image": self.encode_image(image),
                 },
             })
         response = self.model.generate(inputs, self.sampling_params)

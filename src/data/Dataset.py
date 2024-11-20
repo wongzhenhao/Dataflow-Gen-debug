@@ -37,10 +37,7 @@ class ImageCaptionerDataset(DataFlowDataset):
 
     def __getitem__(self, idx):
         image_path = os.path.join(self.image_folder, self.images_data[idx]['image'])
-        if not os.path.exists(image_path):
-            raise FileNotFoundError(f"Image file not found: {image_path}")
-        image = Image.open(image_path).convert('RGB')
-        return image, self.images_data[idx]['id']
+        return image_path, self.images_data[idx]['id']
 
 class ImageGeneratorDataset(DataFlowDataset):
     def __init__(self, 

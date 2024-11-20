@@ -1,0 +1,31 @@
+# example yaml file
+
+meta_path: data/image/test_image_captioner.jsonl # path for the meta data, the format is fixed for image and video
+save_folder: results/image/ # path to save the generated images
+save_per_batch: false # only for captioner
+meta_folder: /mnt/petrelfs/liuzheng/synth_vlm/playground/train # only for captioner
+ImageCaptioner:
+  GPTCaptioner: # Yes/No questions
+    model: gpt-4o
+    api_key: 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
+    max_num_seqs: 256
+    temperature: 0.2
+    sys_prompt: You are an excellent image describer.
+    prompt: """ Generate conversations based on the following description of quality and other low-level visual attributes of an image. These conversations can in- clude one of the aspects in the folow 1. Examining the causes of low-level visual patterns; 2. Providing improve- ment suggestions on photography; 3. Providing tools to re- store, enhance, or edit the image; 4. Recommending the image to respective consumers; 5. Other conversations that may happen given the descriptions. Remember to be rel- evant to the image. Organize the output a list in JSON format (interleaved with ”query” and ”response” keys for each conversation) and when you respond, please only out- put the json, no other words are needed: Description:"""
+    batch_size: 1
+  GPTCaptioner: # Yes/No questions
+    model: gpt-4o
+    api_key: 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
+    max_num_seqs: 256
+    temperature: 0.2
+    sys_prompt: You are an excellent image describer.
+    prompt: """ Generate multiple yes-or-no question and answer pairs based on the following description of an image quality. The answer should be concise and only con- tain ”Yes” or ”No”. The number of questions with the an- swer ”Yes” should be close to the number of questions with the answer ”No”. You can also ask questions about quality issues that are not mentioned in the analysis. The answer for those unsure questions should be ”No”. Organize the output a list in JSON format and when you respond, please only output the json, no other words are needed: Description:"""
+    batch_size: 1
+  GPTCaptioner: # What/How questions
+    model: gpt-4o
+    api_key: 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
+    max_num_seqs: 256
+    temperature: 0.2
+    sys_prompt: You are a helpful assistant.
+    prompt: """Generatemultiplequestionandan- swer pairs based on the following description of an image quality. The questions can start with ”What/Why/How”. The answer should be concise and only contain the core information with minimum words. You should also gener- ate several false answers for each question under the key of “false candidates”, which are also reasonable given the question by contradicts with the description. Organize the output a list in JSON format and when you respond, please only output the json, no other words are needed: Description:"""
+    batch_size: 1

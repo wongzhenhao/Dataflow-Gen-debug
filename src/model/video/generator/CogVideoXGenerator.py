@@ -28,6 +28,7 @@ class CogVideoXGenerator:
 
     def generate_batch(self,
                     prompts):
+<<<<<<< HEAD
         outputs = []
         for prompt in prompts:
             video = self.pipeline(
@@ -41,3 +42,30 @@ class CogVideoXGenerator:
             ).frames[0]
             outputs.append(video)
         return outputs
+=======
+        return outputs  
+    
+    def generate_video(self,
+                    prompt,
+                    num_videos_per_prompt=1,
+                    num_inference_steps=50,
+                    num_frames=49,
+                    guidance_scale=6,
+                    seed: int=42
+                    ):
+        image = load_image(image=prompt['image_path'])
+
+        output = self.pipeline(
+            prompt=prompt['prompt'],
+            image=image,
+            num_videos_per_prompt=num_videos_per_prompt,
+            num_inference_steps=num_inference_steps,
+            num_frames=num_frames,
+            guidance_scale=guidance_scale,
+            generator=torch.Generator(device="cpu").manual_seed(seed),
+        )     
+        frames = output.frames[0]
+        export_to_video(frames, 'cogvideo.mp4', fps=8)
+        return {"id": prompt["id"], "output": output}
+    
+>>>>>>> d8f1547fec2280b0eb39609cfebaf314520fc282
