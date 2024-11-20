@@ -42,26 +42,5 @@ class CogVideoXT2VGenerator:
                 generator=torch.Generator(device="cuda").manual_seed(42),
             ).frames[0]
             outputs.append(video)  
-        return outputs  
-    
-    def generate_video(self,
-                    prompt,
-                    num_videos_per_prompt=1,
-                    num_inference_steps=50,
-                    num_frames=49,
-                    guidance_scale=6,
-                    seed: int=42
-                    ):
-
-        output = self.pipeline(
-            prompt=prompt['prompt'],
-            num_videos_per_prompt=num_videos_per_prompt,
-            num_inference_steps=num_inference_steps,
-            num_frames=num_frames,
-            guidance_scale=guidance_scale,
-            generator=torch.Generator(device="cuda").manual_seed(seed),
-        )     
-        frames = output.frames[0]
-        export_to_video(frames, 'cogvideo.mp4', fps=8)
-        return {"id": prompt["id"], "output": output}
+        return outputs 
     
