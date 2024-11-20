@@ -20,8 +20,6 @@ class CogVideoXGenerator:
 
     def generate_batch(self,
                     prompts):
-
-        outputs = [self.generate_video(prompt) for prompt in prompts]
         return outputs  
     
     def generate_video(self,
