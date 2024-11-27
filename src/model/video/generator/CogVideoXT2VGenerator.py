@@ -42,10 +42,5 @@ class CogVideoXT2VGenerator:
                 generator=torch.Generator(device="cuda").manual_seed(42),
             ).frames[0]
             outputs.append(video)  
-<<<<<<< HEAD
         return outputs  
     
-=======
-        return outputs 
-    
->>>>>>> d8f1547fec2280b0eb39609cfebaf314520fc282
