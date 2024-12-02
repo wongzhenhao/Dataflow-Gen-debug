@@ -58,6 +58,25 @@ class ImageGeneratorDataset(DataFlowDataset):
     def __getitem__(self, idx):
         return self.prompts_data[idx]['text'], self.prompts_data[idx]['image']
 
+class TextGeneratorDataset(DataFlowDataset):
+    def __init__(self, 
+                meta_prompt_path: str, 
+                save_folder: str,
+                **kwargs,
+                ):
+        super().__init__()
+        logging.info(f"Load TextGeneratorDataset with meta_prompt_path: {meta_prompt_path}")
+        self.save_folder = save_folder
+        # load prompts data
+        self.prompts_data = load_from_data_path(meta_prompt_path)
+        os.makedirs(save_folder, exist_ok=True)
+
+    def __len__(self):
+        return len(self.prompts_data)
+
+    def __getitem__(self, idx):
+        return self.prompts_data[idx]['text']
+
 class VideoCaptionerDataset(DataFlowDataset):
     def __init__(self, 
                 meta_video_path: str, 

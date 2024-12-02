@@ -6,7 +6,7 @@ logging.basicConfig(
 )
 
 from src.config import init_config
-from src.core.Wrapper import ImageCaptionerWrapper, VideoCaptionerWrapper, ImageGeneratorWrapper, VideoGeneratorWrapper
+from src.core.Wrapper import ImageCaptionerWrapper, VideoCaptionerWrapper, ImageGeneratorWrapper, VideoGeneratorWrapper, TextGeneratorWrapper
 
 def Image_Captioner(cfg):
     captioner = ImageCaptionerWrapper(
@@ -28,6 +28,19 @@ def Image_Generator(cfg):
                     save_folder=cfg.save_folder, 
     )
     for generator_name, model_config in cfg.ImageGenerator.items():
+        generator.generate_for_one_model(
+                            model_name=generator_name, 
+                            batch_size=model_config['batch_size'],
+                            model_config=model_config,
+                    )
+
+def Text_Generator(cfg):
+    generator = TextGeneratorWrapper(
+                    meta_path=cfg.meta_path, 
+                    save_folder=cfg.save_folder, 
+                    save_file=cfg.save_file
+    )
+    for generator_name, model_config in cfg.TextGenerator.items():
         generator.generate_for_one_model(
                             model_name=generator_name, 
                             batch_size=model_config['batch_size'],
@@ -67,6 +80,8 @@ def main():
         Image_Captioner(cfg)
     if cfg.ImageGenerator:
         Image_Generator(cfg)
+    if cfg.TextGenerator:
+        Text_Generator(cfg)
     if cfg.VideoCaptioner:
         Video_Captioner(cfg)
     if cfg.VideoGenerator:
