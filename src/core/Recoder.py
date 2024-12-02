@@ -63,6 +63,13 @@ class GeneratorRecorder():
             base_dir = os.path.dirname(save_path)
             os.makedirs(base_dir, exist_ok=True)
             self.save(content, save_path)
+    def record_text(self, contents, save_file):
+        save_dir = os.path.join(self.save_folder, self.generator)
+        os.makedirs(save_dir, exist_ok=True)
+        file_path = os.path.join(save_dir, save_file)
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(contents, f, ensure_ascii=False, indent=4)
+
 
     def dump(self):
-        logging.info(f"Images/Videos for model {self.generator} have been saved to folder: {self.save_folder}")
+        logging.info(f"Images/Text/Videos for model {self.generator} have been saved to folder: {self.save_folder}")

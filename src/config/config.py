@@ -13,6 +13,7 @@ def init_config(args=None):
     parser.add_argument('--data', type=Dict, help='Data configurations')
     parser.add_argument('--ImageCaptioner', type=Dict, default=None, help='Image Captioner configurations')
     parser.add_argument('--ImageGenerator', type=Dict, default=None, help='Image Generator configurations')
+    parser.add_argument('--TextGenerator', type=Dict, default=None, help='Text Generator configurations')
     parser.add_argument('--VideoCaptioner', type=Dict, default=None, help='Video Captioner configurations')
     parser.add_argument('--VideoGenerator', type=Dict, default=None, help='Video Generator configurations')
 

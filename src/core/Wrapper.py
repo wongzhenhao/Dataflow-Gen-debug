@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 
 from src.utils.registry import CAPTIONER_REGISTRY, GENERATOR_REGISTRY
 from .Recoder import CaptionerRecorder, GeneratorRecorder
-from src.data.Dataset import ImageCaptionerDataset, ImageGeneratorDataset, VideoCaptionerDataset, VideoGeneratorDataset
+from src.data.Dataset import ImageCaptionerDataset, ImageGeneratorDataset, TextGeneratorDataset, VideoCaptionerDataset, VideoGeneratorDataset
 
 class ImageCaptionerWrapper:
     def __init__(self, 
@@ -66,6 +66,36 @@ class ImageGeneratorWrapper:
     def collate_fn(self, batch):
         images = [prompt for prompt, _ in batch], [path for _, path in batch]
         return images
+
+class TextGeneratorWrapper:
+    def __init__(self, 
+                meta_path: str,
+                save_folder: str,
+                save_file: str
+                ):
+        self.meta_prompt_path = meta_path
+        self.save_folder = save_folder
+        self.save_file = save_file
+        
+    def generate_for_one_model(self, model_name, model_config, batch_size):
+        recorder = GeneratorRecorder(save_folder=self.save_folder, generator=model_name)
+        dataset = TextGeneratorDataset(meta_prompt_path=self.meta_prompt_path, save_folder=self.save_folder)
+        dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+        logging.info(f"Start generating text with model {model_name}")
+        model = GENERATOR_REGISTRY.get(model_name)(**model_config)
+        save_folder = os.path.join(self.save_folder, model_name)
+        os.makedirs(save_folder, exist_ok=True)
+        generated_texts = []
+        for prompts in dataloader:
+            generated_text = self.generate_batch(model, prompts)
+            generated_texts.append(generated_text)
+        recorder.record_text(generated_texts, self.save_file)
+        recorder.dump()
+
+    def generate_batch(self, model, prompts):
+        generated_texts = model.generate_batch(prompts)
+        return generated_texts
+
 
 class VideoCaptionerWrapper:
     def __init__(self, 
