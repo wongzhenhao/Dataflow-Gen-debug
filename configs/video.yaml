@@ -4,14 +4,18 @@ meta_path: data/prompt/i2v.jsonl # path for the meta data, the format is fixed f
 save_folder: results/video # path to save the generated images
 save_per_batch: false # only for captioner
 # meta_folder: /mnt/petrelfs/liuzheng/synth_vlm/playground/train # only for captioner
-VideoGenerator:
-  CogVideoXGenerator:
+steps:
+  type: VideoGenerator
+  name: CogVideoXGenerator
+  config:
     model_path: "THUDM/CogVideoX-5b-I2V"
     num_videos_per_prompt: 1
     num_inference_steps: 50
     num_frames: 49
     guidance_scale: 6
-  AllegroGenerator:
+  type: VideoGenerator
+  name: I2VGenXLGenerator
+  config:
     model_path: "rhymes-ai/Allegro"
     batch_size: 2
     subfolder: "vae"
@@ -20,29 +24,39 @@ VideoGenerator:
     guidance_scale: 7.5
     negative_prompt: ""
     max_sequence_length: 512
-  CogVideoXT2VGenerator:
+  type: VideoGenerator
+  name: CogVideoXT2VGenerator
+  config:
     batch_size: 2
     model_path: "THUDM/CogVideoX-2b"
     num_videos_per_prompt: 1
     num_inference_steps: 50
     num_frames: 49
     guidance_scale: 6
-  I2VGenXLGenerator:
+  type: VideoGenerator
+  name: I2VGenXLGenerator
+  config:
     model_path: "ali-vilab/i2vgen-xl"
     variant: "fp16"
-  SVDGenerator:
+  type: VideoGenerator
+  name: SVDGenerator
+  config:
     model_path: "stabilityai/stable-video-diffusion-img2vid-xt"
     batch_size: 2
     variant: "fp16"
     decode_chunk_size: 8
-  AnimateDiffGenerator:
+  type: VideoGenerator
+  name: AnimateDiffGenerator
+  config:
     model_path: "emilianJR/epiCRealism"
     batch_size: 2
     cpu_offload: True
     num_frames: 16
     num_inference_steps: 59
     guidance_scale: 7.5
-  ModelScopeT2VGenerator:
+  type: VideoGenerator
+  name: ModelScopeT2VGenerator
+  config:
     model_path: "damo-vilab/text-to-video-ms-1.7b"
     batch_size: 2
     variant: "fp16"

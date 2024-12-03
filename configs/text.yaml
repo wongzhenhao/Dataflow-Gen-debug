@@ -1,8 +1,0 @@
-# example yaml file
-
-meta_path: data/image/xxx.jsonl # path to json prompt file
-save_folder: results/text/ # path to save the generated text
-save_file: xxx.json # save file name
-TextGenerator:
-  ChatBotGenerator:
-    xxx: xxx

@@ -20,3 +20,4 @@ def load_from_data_path(data_path):
     else:
         raise ValueError(f"Unsupported file format: {data_path}")
     return data
+
