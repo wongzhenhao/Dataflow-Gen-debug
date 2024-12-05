@@ -7,7 +7,7 @@ meta_folder: /mnt/petrelfs/liuzheng/synth_vlm/playground/train # only for captio
 ImageCaptioner:
   GPTCaptioner: # Yes/No questions
     model: gpt-4o
-    api_key: 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
+    api_key: # your api key
     max_num_seqs: 256
     temperature: 0.2
     sys_prompt: You are an excellent image describer.
@@ -15,7 +15,7 @@ ImageCaptioner:
     batch_size: 1
   GPTCaptioner: # Yes/No questions
     model: gpt-4o
-    api_key: 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
+    api_key: # your api key
     max_num_seqs: 256
     temperature: 0.2
     sys_prompt: You are an excellent image describer.
@@ -23,7 +23,7 @@ ImageCaptioner:
     batch_size: 1
   GPTCaptioner: # What/How questions
     model: gpt-4o
-    api_key: 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
+    api_key: # your api key
     max_num_seqs: 256
     temperature: 0.2
     sys_prompt: You are a helpful assistant.

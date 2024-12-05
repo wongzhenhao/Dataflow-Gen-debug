@@ -1,4 +1,5 @@
 import logging
+import os
 from vllm import LLM, SamplingParams
 from PIL import Image
 
@@ -42,7 +43,7 @@ class LLaVACaptioner:
             inputs.append({
                 "prompt": self.prompt,
                 "multi_modal_data": {
-                    "image": self.encode_image(image),
+                    "image": self.encode_images(image),
                 },
             })
         response = self.model.generate(inputs, self.sampling_params)

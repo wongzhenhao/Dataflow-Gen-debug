@@ -1,103 +1,107 @@
+# src/data/Dataset.py
+
 import os
 import json
 import torch
 from torch.utils.data import Dataset
 import logging
 from PIL import Image
+from typing import Any, List, Dict
 
 from src.utils.data_utils import load_from_data_path
 
 class DataFlowDataset(Dataset):
-    def __init__(self, args=None):
-        pass
+    """
+    Abstract base class for all datasets in the pipeline.
+    """
+    def __init__(self, meta_path: str, save_folder: str):
+        """
+        Initialize the dataset.
 
-    def __getitem__(self, index):
-        pass
+        :param meta_path: Path to the metadata file
+        :param save_folder: Directory to save generated data
+        """
+        super().__init__()
+        self.meta_path = meta_path
+        self.save_folder = save_folder
+        try:
+            self.data = load_from_data_path(meta_path)
+            logging.info(f"Loaded {len(self.data)} items from {self.meta_path}")
+        except Exception as e:
+            logging.error(f"Failed to load data from {self.meta_path}: {e}")
+            raise
 
-    def __len__(self):
-        pass
+    def __getitem__(self, index: int) -> Dict[str, Any]:
+        """
+        Get an item by index.
+
+        :param index: Index of the item
+        :return: Data item as a dictionary
+        """
+        return self.data[index]
+
+    def __len__(self) -> int:
+        """
+        Get the total number of items.
+
+        :return: Length of the dataset
+        """
+        return len(self.data)
+
 
 class ImageCaptionerDataset(DataFlowDataset):
-    def __init__(self, 
-                meta_image_path: str, 
-                image_folder: str,
-                save_folder: str,
-                **kwargs,
-                ):
-        super().__init__()
-        logging.info(f"Load ImageCaptionDataset with meta_image_path: {meta_image_path}, image_folder: {image_folder}")
-        self.image_folder = image_folder
-        self.save_folder = save_folder
+    """
+    Dataset for image captioning tasks.
+    """
+    def __init__(self, meta_path: str, save_folder: str, **kwargs):
+        super().__init__(meta_path, save_folder)
 
-        os.makedirs(save_folder, exist_ok=True)
-        self.images_data = load_from_data_path(meta_image_path)
-        
-    def __len__(self):
-        return len(self.images_data)
-
-    def __getitem__(self, idx):
-        image_path = os.path.join(self.image_folder, self.images_data[idx]['image'])
-        return image_path, self.images_data[idx]['id']
 
 class ImageGeneratorDataset(DataFlowDataset):
-    def __init__(self, 
-                meta_prompt_path: str, 
-                save_folder: str,
-                **kwargs,
-                ):
-        super().__init__()
-        logging.info(f"Load ImageGeneratorDataset with meta_prompt_path: {meta_prompt_path}")
-        self.save_folder = save_folder
-        # load prompts data
-        self.prompts_data = load_from_data_path(meta_prompt_path)
-        os.makedirs(save_folder, exist_ok=True)
+    """
+    Dataset for image generation tasks.
+    """
+    def __init__(self, meta_path: str, save_folder: str, **kwargs):
+        super().__init__(meta_path, save_folder)
+        self.generated_folder = os.path.join(save_folder, 'generated')
+        os.makedirs(self.generated_folder, exist_ok=True)
+        # Update image paths to absolute
+        for item in self.data:
+            raw_image = item.get('raw_image')
+            if raw_image:
+                item['image'] = os.path.abspath(os.path.join(self.generated_folder, raw_image))
+            else:
+                logging.warning("Item missing 'raw_image' key.")
 
-    def __len__(self):
-        return len(self.prompts_data)
-
-    def __getitem__(self, idx):
-        return self.prompts_data[idx]['text'], self.prompts_data[idx]['image']
 
 class VideoCaptionerDataset(DataFlowDataset):
-    def __init__(self, 
-                meta_video_path: str, 
-                video_folder: str,
-                save_folder: str,
-                **kwargs,
-                ):
-        super().__init__()
-        logging.info(f"Load VideoCaptionDataset with meta_video_path: {meta_video_path}, video_folder: {video_folder}")
-        self.video_folder = video_folder
-        self.save_folder = save_folder
+    """
+    Dataset for video captioning tasks.
+    """
+    def __init__(self, meta_path: str, save_folder: str, **kwargs):
+        super().__init__(meta_path, save_folder)
 
-        os.makedirs(save_folder, exist_ok=True)
-        self.videos_data = load_from_data_path(meta_video_path)
-        
-    def __len__(self):
-        return len(self.images_data)
-
-    def __getitem__(self, idx):
-        image_path = os.path.join(self.image_folder, self.images_data[idx]['image'])
-        if not os.path.exists(image_path):
-            raise FileNotFoundError(f"Image file not found: {image_path}")
-        image = Image.open(image_path).convert('RGB')
-        return image, images_data[idx]['id']
 
 class VideoGeneratorDataset(DataFlowDataset):
-    def __init__(self, 
-                meta_prompt_path: str, 
-                save_folder: str,
-                **kwargs,
-                ):
-        super().__init__()
-        logging.info(f"Load VideoGeneratorDataset with meta_prompt_path: {meta_prompt_path}")
-        self.save_folder = save_folder
-        # load prompts data
-        self.prompts_data = load_from_data_path(meta_prompt_path)
-        os.makedirs(save_folder, exist_ok=True)
+    """
+    Dataset for video generation tasks.
+    """
+    def __init__(self, meta_path: str, save_folder: str, **kwargs):
+        super().__init__(meta_path, save_folder)
+        self.generated_folder = os.path.join(save_folder, 'generated')
+        os.makedirs(self.generated_folder, exist_ok=True)
+        # Update video paths to absolute
+        for item in self.data:
+            raw_video = item.get('raw_video')
+            if raw_video:
+                item['video'] = os.path.abspath(os.path.join(self.generated_folder, raw_video))
+            else:
+                logging.warning("Item missing 'raw_video' key.")
 
-    def __len__(self):
-        return len(self.prompts_data)
 
-    def __getitem__(self, idx):
-        return self.prompts_data[idx]
+class TextGeneratorDataset(DataFlowDataset):
+    """
+    Dataset for text generation tasks.
+    """
+    def __init__(self, meta_path: str, save_folder: str, **kwargs):
+        super().__init__(meta_path, save_folder)

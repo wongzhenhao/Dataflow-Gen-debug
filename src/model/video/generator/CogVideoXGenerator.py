@@ -32,7 +32,7 @@ class CogVideoXGenerator:
         for prompt in prompts:
             video = self.pipeline(
                 prompt = prompt['text_prompt'],
-                image = load_image(image=prompt['image_prompt'],
+                image = load_image(image=prompt['image_prompt']),
                 num_videos_per_prompt=self.num_videos_per_prompt,
                 num_inference_steps=self.num_inference_steps,
                 num_frames=self.num_frames,
