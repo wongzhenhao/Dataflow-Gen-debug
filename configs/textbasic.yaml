@@ -1,10 +1,9 @@
-text_generation:
-  model_id: "gpt-3.5-turbo"  # 使用的模型 ID
-  dataset_name: "lmsys/chatbot_arena_conversations"  # 数据集名称
-  split: "train"  # 数据集分割
-  step_size: 200  # 每批次处理的样本数
-  output_dir: "./results/text"  # 输出目录
-  instances: 8  # 模型实例数量
-  gpus: 1  # 使用 GPU 数量
-  per_instance_max_parallel_requests: 200  # 每实例最大并发请求数
-  slurm_template_path: "slurm_configs/vllm_h100.template.slurm"  # 分布式推理配置
+APIGenerator:
+  model_id: "huggingface:openai-community/gpt2"
+  datasetname: "text-generation"
+  output_dir: "outputs/textbasic"
+  output_file_name: "outputs.jsonl"
+  # api_key: "your-api-key"
+  # for huggingface model, provide your huggingface token here
+  temperature: 0.75
+  
