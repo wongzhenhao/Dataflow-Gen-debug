@@ -6,4 +6,23 @@ APIGenerator:
   # api_key: "your-api-key"
   # for huggingface model, provide your huggingface token here
   temperature: 0.75
+  top_p: 0.95
+  max_tokens: 20
+  n: 1
+  stream: False
+  lohprobs: null
+  stop: null
+  presence_penalty: 0.0
+  frequency_penalty: 0.0
+  
+  
+LocalModelGenerator:
+  model_path: "Qwen/QwQ-32B-Preview"
+  dataset_name: "data/dataset.jsonl"
+  output_dir: "outputs/textbasic"
+  output_file_name: "outputs.jsonl"
+  temperature: 0.75
+  max_leagth: 500
+  device: "cuda"
+
   

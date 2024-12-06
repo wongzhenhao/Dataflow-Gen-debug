@@ -19,7 +19,16 @@ class APIGenerator:
         self.output_dir = args_dict.get('output_dir', './results/text')
         self.output_file_name = args_dict.get('output_file_name', 'api_generated_text.jsonl')
         self.temperature = args_dict.get('temperature', 0.75)
+        self.top_p = args_dict.get("top_p",1)
+        self.max_tokens = args_dict.get("max_tokens",1)
+        self.n = args_dict.get("n",1)
+        self.stream = args_dict.get("stream",False)
+        self.logprobs=args_dict.get("logprobs",None)
+        self.stop=args_dict.get("stop",None)
+        self.presence_penalty=args_dict.get("presence_penalty",0.0)
+        self.frequency_penalty=args_dict.get("frequency_penalty",0.0)
         self.api_key = args_dict.get('api_key', None)
+
 
     
     def generate_batch(self, models, texts):
@@ -44,10 +53,27 @@ class APIGenerator:
                     {"role": "user", "content": text}
                 ]
             for model in models:
+                '''
+                 "max_tokens": 7,
+ "temperature": 0,
+ "top_p": 1,
+ "n": 1,
+ "stream": false,
+ "logprobs": null,
+ "stop": "n"
+                '''
                 response = client.chat.completions.create(
                     model=model,
                     messages=messages,
                     temperature=self.temperature,
+                    top_p = self.top_p,
+                    max_tokens = self.max_tokens,
+                    n = self.n,
+                    stream = self.stream,
+                    logprobs = self.logprobs,
+                    stop = self.stop,
+                    presence_penalty = self.presence_penalty,
+                    frequency_penalty = self.frequency_penalty,
                 )
                 content = response.choices[0].message.content
                 json_data = {

@@ -10,6 +10,7 @@ from src.pipeline.wrappers import TextGeneratorWrapper
 class LocalModelGenerator:
     def __init__(self, args_dict: dict):
         super().__init__()
+        self.Generator_name = "LocalModelGenerator"
         self.model_path = args_dict.get('model_path', 'qwen/Qwen-7B-Instruct') 
         self.dataset_name = args_dict.get('dataset_name', 'lmsys/chatbot_arena_conversations')
         self.output_dir = args_dict.get('output_dir', './results/text')
