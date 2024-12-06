@@ -28,6 +28,7 @@ class APIGenerator:
         self.presence_penalty=args_dict.get("presence_penalty",0.0)
         self.frequency_penalty=args_dict.get("frequency_penalty",0.0)
         self.api_key = args_dict.get('api_key', None)
+        self.prompt = args_dict.get("prompt", "You are a helpful assistant.")
 
 
     
@@ -39,29 +40,11 @@ class APIGenerator:
 
         # 遍历dataset
         for text in texts:
-            try:
-                data = json.loads(text)
-                system_prompt = data.get('system_prompt', '')
-                user_prompt = data.get('user_prompt', '')
-                messages = [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ]
-            else:
-                messages = [
-                    {"role": "system", "content": ""},
+            messages = [
+                    {"role": "system", "content": self.prompt},
                     {"role": "user", "content": text}
                 ]
             for model in models:
-                '''
-                 "max_tokens": 7,
- "temperature": 0,
- "top_p": 1,
- "n": 1,
- "stream": false,
- "logprobs": null,
- "stop": "n"
-                '''
                 response = client.chat.completions.create(
                     model=model,
                     messages=messages,

@@ -18,7 +18,7 @@ class LocalModelGenerator:
         self.temperature = args_dict.get('temperature', 0.75)
         self.max_length = args_dict.get('max_length', 500)
         self.device = args_dict.get('device', 'cuda' if torch.cuda.is_available() else 'cpu')
-
+        self.prompt = args_dict.get("prompt", "You are a helpful assistant.")
         # 加载tokenizer和模型
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
         self.model = AutoModelForCausalLM.from_pretrained(self.model_path).to(self.device)
@@ -54,13 +54,9 @@ class LocalModelGenerator:
 
         # 遍历数据集
         for text in texts:
-            try:
-                data = json.loads(text)
-                system_prompt = data.get('system_prompt', '')
-                user_prompt = data.get('user_prompt', '')
-            except:
-                system_prompt = ""
-                user_prompt = text
+
+        system_prompt = self.prompt
+        user_prompt = text
             # 生成响应
             try:
                 response = self.generate_response(system_prompt, user_prompt)
