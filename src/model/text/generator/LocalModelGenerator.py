@@ -55,8 +55,8 @@ class LocalModelGenerator:
         # 遍历数据集
         for text in texts:
 
-        system_prompt = self.prompt
-        user_prompt = text
+            system_prompt = self.prompt
+            user_prompt = text
             # 生成响应
             try:
                 response = self.generate_response(system_prompt, user_prompt)
