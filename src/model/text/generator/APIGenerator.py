@@ -2,7 +2,7 @@ import logging
 import aisuite as ai
 from src.utils.registry import GENERATOR_REGISTRY
 from src.utils.data_utils import load_from_data_path
-from src.pipeline.wrappers import TextGeneratorWrapper
+import json
 # APIKEY should be set in the environment variable or provided in the config file
 
 
@@ -11,6 +11,7 @@ from src.pipeline.wrappers import TextGeneratorWrapper
 class APIGenerator:
     def __init__(self, args_dict: dict):
         super().__init__()
+        self.Generator_name = "APIGenerator"
         self.model_id = args_dict.get('model_id', 'openai:gpt-4o') # must be <provider:modelname>
         # for model on huggingface, use <huggingface:modelname> 
         # (and don't forget provide your huggingface token in the environment variable or in the config file)
@@ -21,23 +22,27 @@ class APIGenerator:
         self.api_key = args_dict.get('api_key', None)
 
     
-    def generate_batch(self, captions):
+    def generate_batch(self, models, texts):
         client = ai.Client()
         models = self.model_id.split(',')
         outputs = []
         
-        # load dataset
-        dataset = load_from_data_path(self.dataset_name)
+
         # 遍历dataset
-        for data in dataset:
-            # data should be a dict
-            # get system prompt and user prompt
-            system_prompt = data.get('system_prompt', '')
-            user_prompt = data.get('user_prompt', '')
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
+        for text in texts:
+            try:
+                data = json.loads(text)
+                system_prompt = data.get('system_prompt', '')
+                user_prompt = data.get('user_prompt', '')
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ]
+            else:
+                messages = [
+                    {"role": "system", "content": ""},
+                    {"role": "user", "content": text}
+                ]
             for model in models:
                 response = client.chat.completions.create(
                     model=model,
