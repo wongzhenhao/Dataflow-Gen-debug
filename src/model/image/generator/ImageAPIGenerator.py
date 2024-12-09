@@ -133,7 +133,7 @@ class ImageAPIGenerator:
         outputs = []
         for caption in captions:
             response = self.client.text_to_image(caption)
-            outputs.append(caption)
+            outputs.append(response)
         
         return outputs
     
@@ -142,3 +142,7 @@ class ImageAPIGenerator:
             return self.generate_batch_openai(captions)
         elif 'stable-diffusion' in self.model:
             return self.generate_batch_stable_diffusion(captions)
+        elif 'flux' in self.model:
+            return self.generate_batch_flux(captions)
+        elif 'huggingface' in self.model:
+            return self.generate_batch_huggingface(captions)
