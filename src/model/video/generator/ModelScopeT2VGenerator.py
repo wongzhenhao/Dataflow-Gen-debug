@@ -20,6 +20,6 @@ class ModelScopeT2VGenerator:
                     prompts):
         outputs = []
         for prompt in prompts:
-            video = self.pipeline(prompt['text_prompt']).frames[0]
+            video = self.pipeline(prompt['text']).frames[0]
             outputs.append(video)
         return outputs    

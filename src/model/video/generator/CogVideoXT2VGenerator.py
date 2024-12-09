@@ -34,7 +34,7 @@ class CogVideoXT2VGenerator:
         outputs = []
         for prompt in prompts:
             video = self.pipeline(
-                prompt=prompt['text_prompt'],
+                prompt=prompt['text'],
                 num_videos_per_prompt=self.num_videos_per_prompt,
                 num_inference_steps=self.num_inference_steps,
                 num_frames=self.num_frames,

@@ -256,10 +256,9 @@ class VideoGeneratorWrapper(PipelineStep):
         model = GENERATOR_REGISTRY.get(self.model_name)(**self.config)
 
         for metadata_batch in dataloader:
-            prompts = [meta['text'] for meta in metadata_batch]
             video_paths = [meta['video'] for meta in metadata_batch]
             try:
-                generated_videos = self.generate_batch(model, prompts)
+                generated_videos = self.generate_batch(model, metadata_batch)
                 for video, path in zip(generated_videos, video_paths):
                     self.save_video(video, path)
                 recorder.record(metadata_batch)

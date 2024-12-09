@@ -40,8 +40,9 @@ class AnimateDiffGenerator:
 
         outputs=[]
         for prompt in prompts:
+            print(prompt)
             video = self.pipeline(
-                prompt=prompt['text_prompt'],
+                prompt=prompt['text'],
                 negative_prompt=self.negative_prompt,
                 num_frames=self.num_frames,
                 guidance_scale=self.guidance_scale,

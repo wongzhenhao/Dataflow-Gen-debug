@@ -1,8 +1,9 @@
 import logging
 from src.utils.registry import GENERATOR_REGISTRY
 from diffusers import DiffusionPipeline
-from diffusers.utils import export_to_video
+from diffusers.utils import export_to_video, load_image
 import torch
+
 
 @GENERATOR_REGISTRY.register()
 class I2VGenXLGenerator:
@@ -22,8 +23,8 @@ class I2VGenXLGenerator:
         outputs = []
         for prompt in prompts:
             video = self.pipeline(
-                prompt=prompt['text_prompt'],
-                image=load_image(prompt['image_prompt']).convert("RGB"),
+                prompt=prompt['text'],
+                image=load_image(prompt['image_path']).convert("RGB"),
                 generator=torch.manual_seed(8888)
             ).frames[0]
         outputs.append(video)

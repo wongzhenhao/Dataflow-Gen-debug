@@ -23,7 +23,7 @@ class SVDGenerator:
                     prompts):
         outputs = []
         for prompt in prompts:
-            image = load_image(image=prompt['image_prompt'])
+            image = load_image(image=prompt['image_path'])
             image = image.resize((1024,576))
             video = self.pipeline(
                 image,
