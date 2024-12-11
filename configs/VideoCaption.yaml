@@ -1,0 +1,56 @@
+# example yaml file
+
+meta_path: /mnt/petrelfs/niujunbo/DataFlow/video.jsonl # path for the meta data, the format is fixed for image and video
+meta_folder: data/video # only for captioner
+base_folder: intermediate_results/ # path to save the intermediate results
+save_folder: results/ # path to save the caption
+image_key: image # key for the image in the meta data
+text_key: text # key for the text in the meta data
+video_key: video # key for the video in the meta data
+
+steps:
+  - type: VideoCaptioner
+    name: Qwen2VLCaptioner
+    config:
+      model_path: /mnt/hwfile/mllm/niujunbo/model/Qwen/Qwen2-VL-7B-Instruct
+      trust_remote_code: true
+      tensor_parallel_size: 1
+      max_model_len: 2048
+      max_num_seqs: 128
+      temperature: 0.7
+      top_p: 0.9
+      top_k: 50
+      repetition_penalty: 1.2
+      prompt: "Please describe the video in detail."
+      repeat_time: 5
+      batch_size: 1000
+  # - type: VideoCaptioner
+  #   name: LLaVAOVCaptioner
+  #   config:
+  #     model_path: /mnt/hwfile/opendatalab/niujunbo/model/llava-hf/llava-onevision-qwen2-7b-ov-hf
+  #     trust_remote_code: true
+  #     tensor_parallel_size: 1
+  #     max_model_len: 2048
+  #     max_num_seqs: 128
+  #     temperature: 0.7
+  #     top_p: 0.9
+  #     top_k: 50
+  #     repetition_penalty: 1.2
+  #     prompt: “Please describe the video in detail.”
+  #     repeat_time: 5
+  #     batch_size: 1000
+  # - type: VideoCaptioner
+  #   name: LlavaNextVideoCaptioner
+  #   config:
+  #     model_path: /mnt/hwfile/opendatalab/niujunbo/model/llava-hf/LLaVA-NeXT-Video-7B-hf
+  #     trust_remote_code: true
+  #     tensor_parallel_size: 1
+  #     max_model_len: 2048
+  #     max_num_seqs: 128
+  #     temperature: 0.7
+  #     top_p: 0.9
+  #     top_k: 50
+  #     repetition_penalty: 1.2
+  #     prompt: “Please describe the video in detail.”
+  #     repeat_time: 5
+  #     batch_size: 1000
