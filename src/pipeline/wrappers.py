@@ -329,11 +329,14 @@ class TextGeneratorWrapper(PipelineStep):
         """
         recorder = Recorder(
             data_manager=self.data_manager,
-            save_folder=self.data_manager.get_path(self.name),
+            step_name= self.name
+            # save_folder=self.data_manager.get_path(self.name),
         )
         dataset = TextGeneratorDataset(
-            meta_prompt_path=input_data,
-            save_folder=self.save_folder
+            # meta_prompt_path=input_data,
+            # save_folder=self.save_folder
+            meta_path=input_data,
+            save_folder=self.data_manager.get_path(self.name)
         )
         dataloader = DataLoader(
             dataset,
