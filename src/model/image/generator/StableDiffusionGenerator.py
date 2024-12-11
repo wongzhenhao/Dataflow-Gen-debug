@@ -1,5 +1,5 @@
 from diffusers import StableDiffusion3Pipeline
-import torch
+import torch, logging
 from PIL import Image
 
 from src.utils.registry import GENERATOR_REGISTRY

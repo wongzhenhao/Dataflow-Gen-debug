@@ -1,4 +1,4 @@
-import logging
+import logging, os
 from vllm import LLM, SamplingParams
 from PIL import Image
 

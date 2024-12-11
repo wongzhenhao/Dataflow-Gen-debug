@@ -2,6 +2,7 @@
 
 import os
 import logging
+import requests
 from torch.utils.data import DataLoader
 from typing import Any, List, Dict
 from PIL import Image
@@ -144,7 +145,7 @@ class ImageGeneratorWrapper(PipelineStep):
         return batch
 
     @staticmethod
-    def save_image(image: Image.Image, path: str):
+    def save_image(image: Image.Image | str, path: str):
         """
         Save the generated image to the specified path.
 
@@ -152,7 +153,15 @@ class ImageGeneratorWrapper(PipelineStep):
         :param path: Path to save the image
         """
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        image.save(path)
+        if type(image) == str:
+            response = requests.get(image)
+            if response.status_code == 200:
+                with open(path, 'wb') as f:
+                    f.write(response.content)
+            else:
+                logging.info(f'save image {image} failed')
+        else:
+            image.save(path)
 
 
 class VideoCaptionerWrapper(PipelineStep):

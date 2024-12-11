@@ -137,3 +137,24 @@ steps:
   #     max_sequence_length: 512
   #     batch_size: 1
   #     device: cuda
+  - type: ImageCaptioner
+    name: ImageAPICaptioner
+    config:
+      model: openai:gpt-4o
+      api_key: api_kay
+      base_url: base_url
+      max_tokens: 256
+      temperature: 0.2
+      sys_prompt: You are a helpful assistant.
+      prompt: What is the content of this image?
+      repeat_time: 5
+      batch_size: 1000
+  - type: ImageGenerator
+    name: ImageAPIGenerator
+    config:
+      model: openai:dall-e-3
+      api_key: api_key
+      api_url: api_url
+      height: 1024
+      width: 1024
+      quality: standard
