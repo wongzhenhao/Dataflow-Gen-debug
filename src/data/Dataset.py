@@ -67,11 +67,11 @@ class ImageGeneratorDataset(DataFlowDataset):
         os.makedirs(self.generated_folder, exist_ok=True)
         # Update image paths to absolute
         for item in self.data:
-            raw_image = item.get('raw_image')
-            if raw_image:
-                item['image'] = os.path.abspath(os.path.join(self.generated_folder, raw_image))
+            dataflow_image = item.get('image')
+            if dataflow_image:
+                item['dataflow_image'] = os.path.abspath(os.path.join(self.generated_folder, dataflow_image))
             else:
-                logging.warning("Item missing 'raw_image' key.")
+                logging.warning("Item missing 'dataflow_image' key.")
 
 
 class VideoCaptionerDataset(DataFlowDataset):
@@ -92,11 +92,11 @@ class VideoGeneratorDataset(DataFlowDataset):
         os.makedirs(self.generated_folder, exist_ok=True)
         # Update video paths to absolute
         for item in self.data:
-            raw_video = item.get('raw_video')
-            if raw_video:
-                item['video'] = os.path.abspath(os.path.join(self.generated_folder, raw_video))
+            dataflow_video = item.get('video')
+            if dataflow_video:
+                item['dataflow_video'] = os.path.abspath(os.path.join(self.generated_folder, dataflow_video))
             else:
-                logging.warning("Item missing 'raw_video' key.")
+                logging.warning("Item missing 'dataflow_video' key.")
 
 
 class TextGeneratorDataset(DataFlowDataset):

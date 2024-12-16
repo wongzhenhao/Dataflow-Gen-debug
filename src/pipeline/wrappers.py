@@ -51,10 +51,10 @@ class ImageCaptionerWrapper(PipelineStep):
         model = CAPTIONER_REGISTRY.get(self.model_name)(**self.config)
 
         for metadata_batch in dataloader:
-            images = [meta['image'] for meta in metadata_batch]
+            images = [meta['dataflow_image'] for meta in metadata_batch]
             captions = self.generate_batch(model, images)
             for meta, caption in zip(metadata_batch, captions):
-                meta['text'] = caption
+                meta['dataflow_text'] = caption
             recorder.record(metadata_batch)
 
         return recorder.dump()
@@ -114,8 +114,8 @@ class ImageGeneratorWrapper(PipelineStep):
         model = GENERATOR_REGISTRY.get(self.model_name)(**self.config)
 
         for metadata_batch in dataloader:
-            prompts = [meta['text'] for meta in metadata_batch]
-            image_paths = [meta['image'] for meta in metadata_batch]
+            prompts = [meta['dataflow_text'] for meta in metadata_batch]
+            image_paths = [meta['dataflow_image'] for meta in metadata_batch]
             generated_images = self.generate_batch(model, prompts)
             for image, path in zip(generated_images, image_paths):
                 self.save_image(image, path)
@@ -198,11 +198,11 @@ class VideoCaptionerWrapper(PipelineStep):
         model = CAPTIONER_REGISTRY.get(self.model_name)(**self.config)
 
         for metadata_batch in dataloader:
-            videos = [meta['video'] for meta in metadata_batch]
+            videos = [meta['dataflow_video'] for meta in metadata_batch]
             try:
                 captions = self.generate_batch(model, videos)
                 for meta, caption in zip(metadata_batch, captions):
-                    meta['text'] = caption
+                    meta['dataflow_text'] = caption
                 recorder.record(metadata_batch)
             except Exception as e:
                 logging.error(f"Failed to generate video captions: {e}")
@@ -265,7 +265,7 @@ class VideoGeneratorWrapper(PipelineStep):
         model = GENERATOR_REGISTRY.get(self.model_name)(**self.config)
 
         for metadata_batch in dataloader:
-            video_paths = [meta['video'] for meta in metadata_batch]
+            video_paths = [meta['dataflow_video'] for meta in metadata_batch]
             try:
                 generated_videos = self.generate_batch(model, metadata_batch)
                 for video, path in zip(generated_videos, video_paths):
@@ -339,11 +339,8 @@ class TextGeneratorWrapper(PipelineStep):
         recorder = Recorder(
             data_manager=self.data_manager,
             step_name= self.name
-            # save_folder=self.data_manager.get_path(self.name),
         )
         dataset = TextGeneratorDataset(
-            # meta_prompt_path=input_data,
-            # save_folder=self.save_folder
             meta_path=input_data,
             save_folder=self.data_manager.get_path(self.name)
         )
@@ -357,11 +354,11 @@ class TextGeneratorWrapper(PipelineStep):
         model = GENERATOR_REGISTRY.get(self.model_name)(**self.config)
 
         for metadata_batch in dataloader:
-            prompts = [meta['text'] for meta in metadata_batch]
+            prompts = [meta['dataflow_text'] for meta in metadata_batch]
             try:
                 generated_texts = self.generate_batch(model, prompts)
                 for meta, text in zip(metadata_batch, generated_texts):
-                    meta['text'] = text
+                    meta['dataflow_text'] = text
                 recorder.record(metadata_batch)
             except Exception as e:
                 logging.error(f"Failed to generate texts: {e}")

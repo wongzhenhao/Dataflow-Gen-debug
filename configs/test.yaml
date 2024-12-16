@@ -1,0 +1,26 @@
+# example yaml file
+
+meta_path: data/image/test_image_captioner.jsonl # path for the meta data, the format is fixed for image and video
+meta_folder: data/image # only for captioner
+base_folder: image_intermediate_results/ # path to save the intermediate results
+save_folder: results/image_captioner # path to save the generated images
+image_key: image # key for the image in the meta data
+text_key: text # key for the text in the meta data
+video_key: video # key for the video in the meta data
+
+steps:
+  - type: ImageCaptioner
+    name: LLaVACaptioner
+    config: 
+      model_path: /mnt/petrelfs/liuzheng/cjz/llava-1.5-7b-hf
+      trust_remote_code: true
+      tensor_parallel_size: 2
+      max_model_len: 2048
+      max_num_seqs: 128
+      temperature: 0.7
+      top_p: 0.9
+      top_k: 50
+      repetition_penalty: 1.2
+      prompt: What is the content of this image?
+      repeat_time: 5
+      batch_size: 1000

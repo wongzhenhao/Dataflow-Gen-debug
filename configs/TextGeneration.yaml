@@ -1,26 +1,26 @@
 # example yaml file
+
 meta_path: test/text.jsonl
 base_folder: text_intermediate_results/
-save_folder: results/
-text_key: text
-
+save_folder: results/text_generator
+image_key: image # key for the image in the meta data
+text_key: text # key for the text in the meta data
+video_key: video # key for the video in the meta data
 
 steps:
-#  - type: TextGenerator
-#    name: APIGenerator # API KEY must be set in the environment variable
-#    config:
-#      model_id: "openai:gpt-4o"
-#      temperature: 0.75
-#      top_p: 0.95
-#      max_tokens: 20
-#      n: 1 # we can only set n = 1 currently (because of output method)
-#      stream: False
-#      stop: null
-#      presence_penalty: 0.0
-#      frequency_penalty: 0.0
-#      prompt: "You are a helpful assistant."
-  
-
+ - type: TextGenerator
+   name: APIGenerator # API KEY must be set in the environment variable
+   config:
+     model_id: "openai:gpt-4o"
+     temperature: 0.75
+     top_p: 0.95
+     max_tokens: 20
+     n: 1 # we can only set n = 1 currently (because of output method)
+     stream: False
+     stop: null
+     presence_penalty: 0.0
+     frequency_penalty: 0.0
+     prompt: "You are a helpful assistant."
   - type: TextGenerator
     name: LocalModelGenerator
     config:

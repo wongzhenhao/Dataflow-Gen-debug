@@ -38,16 +38,21 @@ class PipelineManager:
             'type': 'preprocess',
             'name': 'format',
             'config': {
-                'text_key': config.get('text_key'),
-                'image_key': config.get('image_key'),
-                'video_key': config.get('video_key'),
+                'text_key': config.get('text_key', None),
+                'image_key': config.get('image_key', None),
+                'video_key': config.get('video_key', None),
                 'meta_folder': config.get('meta_folder', None)
             }
         }
         postprocess_step = {
             'type': 'postprocess',
             'name': 'format',
-            'config': {}
+            'config': {
+                'text_key': config.get('text_key', None),
+                'image_key': config.get('image_key', None),
+                'video_key': config.get('video_key', None),
+                'meta_folder': config.get('meta_folder', None)
+            }
         }
         self.steps_config = [preprocess_step] + self.steps_config + [postprocess_step]
         

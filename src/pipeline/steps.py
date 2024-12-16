@@ -45,9 +45,9 @@ class PipelinePreprocessStep(PipelineStep):
         :return: Path to the saved preprocessed data
         """
         data = load_from_data_path(input_data)
-        text_key = self.config.get('text_key')
-        image_key = self.config.get('image_key')
-        video_key = self.config.get('video_key')
+        text_key = self.config.get('text_key', None)
+        image_key = self.config.get('image_key', None)
+        video_key = self.config.get('video_key', None)
         meta_folder = self.config.get('meta_folder')
 
         new_data = [
@@ -77,16 +77,16 @@ class PipelinePreprocessStep(PipelineStep):
         new_item = {k: v for k, v in item.items() if k not in [text_key, image_key, video_key]}
 
         if text_key and text_key in item:
-            new_item['raw_text'] = item[text_key]
             new_item['text'] = item[text_key]
+            new_item['dataflow_text'] = item[text_key]
 
         if image_key and image_key in item:
-            new_item['raw_image'] = item[image_key]
-            new_item['image'] = os.path.abspath(os.path.join(meta_folder, item[image_key]))
+            new_item['image'] = item[image_key]
+            new_item['dataflow_image'] = os.path.abspath(os.path.join(meta_folder, item[image_key]))
 
         if video_key and video_key in item:
-            new_item['raw_video'] = item[video_key]
-            new_item['video'] = os.path.abspath(os.path.join(meta_folder, item[video_key]))
+            new_item['video'] = item[video_key]
+            new_item['dataflow_video'] = os.path.abspath(os.path.join(meta_folder, item[video_key]))
 
         return new_item
 
@@ -99,5 +99,52 @@ class PipelinePostprocessStep(PipelineStep):
         super().__init__(name, config)
         self.data_manager = data_manager
 
+    def _reformat_item(self, item: Dict, text_key: str, image_key: str, video_key: str) -> Dict:
+        """
+        Reformat a single data item based on specified keys.
+
+        :param item: Original data item
+        :param text_key: Key for text data
+        :param image_key: Key for image data
+        :param video_key: Key for video data
+        :return: Reformatted data item
+        """
+        exclude_keys = {'text', 'dataflow_text', 'image', 'dataflow_image', 'video', 'dataflow_video'}
+        new_item = {k: v for k, v in item.items() if k not in exclude_keys}
+        
+        key_mapping = {
+            'dataflow_text': text_key,
+            'dataflow_image': image_key,
+            'dataflow_video': video_key
+        }
+        
+        for original_key, new_key in key_mapping.items():
+            if original_key in item:
+                new_item[new_key or original_key] = item[original_key]
+        
+        return new_item
+
+
     def execute(self, input_data: str) -> str:
-        self.data_manager.save_final_results()
+        """
+        Load data, reformat it based on keys, and record the new data.
+        """
+        final_save_folder = self.data_manager.save_final_results()
+        final_save_path = os.path.join(final_save_folder, 'result.jsonl')
+        data = load_from_data_path(final_save_path)
+        text_key = self.config.get('text_key', None)
+        image_key = self.config.get('image_key', None)
+        video_key = self.config.get('video_key', None)
+
+        new_data = [
+            self._reformat_item(item, text_key, image_key, video_key)
+            for item in data
+        ]
+
+        recorder = Recorder(
+            data_manager=self.data_manager,
+            step_name=final_save_folder,
+        )
+        recorder.record(new_data)
+        return recorder.dump()
+
