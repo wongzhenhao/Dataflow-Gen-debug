@@ -76,7 +76,50 @@
       <td>基于 Stable Diffusion 3 实现的视频生成方法，能够生成高质量、细节丰富的图像，速度较快。</td>
       <td><a href="https://github.com/Stability-AI/StableDiffusion">代码</a><br><a href="https://arxiv.org/abs/2112.10752">论文</a></td>
     </tr>
+    <tr>
+      <td>AllegroGenerator</td>
+      <td>rhymes-ai/Allegro</td>
+      <td>能够根据简单的文本输入生成高质量、动态的视频，时长可达 6 秒，帧率为 15FPS，分辨率为 720p。</td>
+      <td><a href="https://github.com/rhymes-ai/Allegro">代码</a><br><a href="https://arxiv.org/abs/2410.15458">论文</a></td>
+    </tr>
+    <tr>
+      <td>AnimateDiffGenerator</td>
+      <td>guoyww/animatediff-motion-adapter-v1-5-2</td>
+      <td>基于Stable Diffusion及 DreamBooth、LoRA 等个性化技术实现的动画生成框架，能够为多数现有的个性化文本到图像模型一键植入动画能力</td>
+      <td><a href="https://github.com/guoyww/AnimateDiff">代码</a><br><a href="https://arxiv.org/abs/2307.04725">论文</a></td>
+    </tr>
+    <tr>
+      <td>CogVideoXT2VGenerator</td>
+      <td>rhymes-ai/Allegro</td>
+      <td>基于diffusion transformer构建的文本到视频生成模型，在运动表现、时长和文本-视频对齐方面优势显著</td>
+      <td><a href="https://github.com/THUDM/CogVideo">代码</a><br><a href="https://arxiv.org/abs/2408.06072">论文</a></td>
+    </tr>
+    <tr>
+      <td>CogVideoXGenerator</td>
+      <td>THUDM/CogVideoX-5b-I2V</td>
+      <td>基于diffusion transformer构建的图像到视频生成模型，在运动表现、时长和文本-视频对齐方面优势显著</td>
+      <td><a href="https://github.com/THUDM/CogVideo">代码</a><br><a href="https://arxiv.org/abs/2408.06072">论文</a></td>
+    </tr>
+    <tr>
+      <td>I2VGenXLGenerator</td>
+      <td>ali-vilab/i2vgen-xl</td>
+      <td>基于层级编码与扩散模型优化实现的视频生成方式，，最终能够依据用户输入从单张静态图像生成高质量、逼真动画且时间连贯的高清视频。</td>
+      <td><a href="https://github.com/ali-vilab/VGen">代码</a><br><a href="https://arxiv.org/abs/2311.04145">论文</a></td>
+    </tr>
+    <tr>
+      <td>ModelScopeT2VGenerator</td>
+      <td>damo-vilab/text-to-video-ms-1.7b</td>
+      <td>基于 Stable Diffusion 演进而来的文本到视频合成模型，通过集成时空模块确保帧生成与运动转换效果，具备适应不同帧数的能力从而适用于多种数据集。</td>
+      <td><a href="https://github.com/ali-vilab/VGen">代码</a><br><a href="https://arxiv.org/abs/2308.06571">论文</a></td>
+    </tr>
+    <tr>
+      <td>SVDGenerator</td>
+      <td>stabilityai/stable-video-diffusion-img2vid-xt</td>
+      <td>基于diffusion构建的视频生成方式，其模型在文本到视频、图像到视频生成及多视图任务中表现优异，可生成高质量且运动表现出色的视频。</td>
+      <td><a href="https://github.com/Stability-AI/generative-models">代码</a><br><a href="https://arxiv.org/abs/2311.15127">论文</a></td>
+    </tr>
   </tbody>
+  
 </table>
 
 ### 使用方法
@@ -311,4 +354,3 @@ Dataflow-Gen/
 ├── config.yaml
 
 ├── README.md
-
