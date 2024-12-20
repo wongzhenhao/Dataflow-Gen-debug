@@ -1,98 +1,96 @@
 # Text Processing Pipeline
 
-### 目录
+### Table of Contents
 
 - [Text Processing Pipeline](#text-processing-pipeline)
-    - [目录](#目录)
-    - [文本方法概览](#文本方法概览)
-    - [使用方法](#使用方法)
-    - [输入与输出格式](#输入与输出格式)
-    - [示例](#示例)
-    - [项目结构](#项目结构)
+    - [Table of Contents](#table-of-contents)
+    - [Overview of Text Methods](#overview-of-text-methods)
+    - [Usage Instructions](#usage-instructions)
+    - [Examples](#examples)
+    - [Project Structure](#project-structure)
 
-### 文本方法概览
+### Overview of Text Methods
 
-文本生成部分主要涵盖两大类文本生成算法：**API文本生成**与**本地模型文本生成**。以下内容将详细介绍每类方法的具体模型、功能简介。
+The text generation section mainly covers two categories of text generation algorithms: **API-based Text Generation** and **Local Model Text Generation**. The following details the specific models and functionalities of each method.
 
-**API文本生成方法**
+**API-based Text Generation Methods**
 
 <table>
   <thead>
     <tr>
-      <th>名称</th>
-      <th>模型接口</th>
-      <th>简介</th>
-      <th>官方仓库或文档</th>
+      <th>Name</th>
+      <th>Model Interface</th>
+      <th>Description</th>
+      <th>Official Repository or Documentation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>APIGenerator</td>
-      <td>使用aisuite格式的模型接口"provider:model"，例如"openai:gpt-4o"</td>
-      <td>使用aisuite库的统一接口，从包含OpenAI、Claude、Huggingface在内多个平台，使用APIkey获得模型相应</td>
+      <td>Uses aisuite-style model interface "provider:model", e.g., "openai:gpt-4o"</td>
+      <td>Leverages the unified interface of the aisuite library to access responses from multiple platforms including OpenAI, Claude, and Huggingface via API keys.</td>
       <td><a href="https://github.com/andrewyng/aisuite">Github Page of aisuite</a></td>
     </tr>
   </tbody>
 </table>
 
-**本地模型文本生成方法**
+**Local Model Text Generation Methods**
 
 <table>
   <thead>
     <tr>
-      <th>名称</th>
-      <th>模型接口</th>
-      <th>简介</th>
-      <th>官方仓库或文档</th>
+      <th>Name</th>
+      <th>Model Interface</th>
+      <th>Description</th>
+      <th>Official Repository or Documentation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>LocalModelGenerator</td>
-      <td>Huggingface上的模型路径名，例如Qwen/Qwen2.5-1.5B-Instruct</td>
-      <td>生成器首先将指定模型下载到指定路径，然后基于vllm进行推理，获得模型响应。</td>
-      <td>暂无</td>
+      <td>Model path name on Huggingface, e.g., Qwen/Qwen2.5-1.5B-Instruct</td>
+      <td>The generator first downloads the specified model to the designated path and then performs inference based on vllm to obtain model responses.</td>
+      <td>Not available</td>
     </tr>
   </tbody>
 </table>
 
-### 使用方法
+### Usage Instructions
 
-1. **运行pipeline**:
+1. **Run the Pipeline**:
 
-   执行起始脚本 `run_pipeline.py`。此脚本根据配置文件运行整个文本生成pipeline，包括：
+   Execute the entry script `run_pipeline.py`. This script runs the entire text generation pipeline based on the configuration file, including:
 
-   - **预处理**：从用户指定的jsonl文件中，依据configs中指定的text key，读取每个json中相应的key，作为prompt.
-   - **模型推理**：根据用户的配置文件调用模型进行文本生成。
-   - **后处理**：完成数据格式转化、结果保存等工作，将内部处理格式转换为用户的格式。
+   - **Preprocessing**: Reads the specified text key from each JSON in the user-specified JSONL file as the prompt, based on the configuration in `configs`.
+   - **Model Inference**: Generates text using models specified in the configuration file.
+   - **Postprocessing**: Converts data formats, saves results, and transforms the internal processing format to the user’s desired format.
 
-   **命令行运行**
+   **Command Line Execution**
 
    ```bash
    python run_pipeline.py --config path/to/config.yaml
    ```
+2. **Configuration File**
 
-2. **配置文件**
+   The configuration file uses YAML format to define the pipeline's input, output, and the configuration for each step.
 
-   配置文件采用 YAML 格式，用于定义pipeline的输入、输出以及各个步骤的配置。
-
-   **示例配置文件**
+   **Example Configuration File**
 
    ```yaml
-   meta_path: data/text/test_text_generation.jsonl # 元数据路径，包含文本生成的提示
-   base_folder: text_intermediate_results/ # 保存中间结果的路径
-   save_folder: results/ # 保存生成文本的路径
-   text_key: prompt # 元数据中文本提示的键
+   meta_path: data/text/test_text_generation.jsonl # Path to metadata containing prompts for text generation
+   base_folder: text_intermediate_results/ # Path to save intermediate results
+   save_folder: results/ # Path to save generated texts
+   text_key: prompt # Key in metadata for text prompts
 
    steps:
      - type: TextGenerator
-       name: APIGenerator # API KEY必须在环境变量中设置
+       name: APIGenerator # API KEY must be set in environment variables
        config:
          model_id: "openai:gpt-4o"
          temperature: 0.75
          top_p: 0.95
          max_tokens: 20
-         n: 1 # 当前仅支持 n = 1
+         n: 1 # Currently supports only n = 1
          stream: False
          stop: null
          presence_penalty: 0.0
@@ -131,19 +129,18 @@
          allowed_token_ids: null  # List[int]
          download_dir: "ckpr/models/"
          prompt: "You are a helpful assistant."
-   ```
+    ```
+    **Configuration Parameter Descriptions**
 
-   **配置参数说明**
+   - **meta_path**: Path to the JSONL file containing metadata. Each line is a JSON object with prompts for text generation.
+   - **base_folder**: Root directory to save intermediate results.
+   - **save_folder**: Directory to save the final generated results.
+   - **text_key**: Key in the metadata that specifies the text prompt.
+   - **steps**: Defines the steps to execute. Each step includes the type, name, and specific configurations.
 
-   - **meta_path**: 指向包含元数据的JSONL文件的路径。每行一个JSON对象，包含文本生成的提示。
-   - **base_folder**: 中间结果保存的根目录。
-   - **save_folder**: 最终生成结果的保存目录。
-   - **text_key**: 元数据中表示文本提示的键。
-   - **steps**: 定义需要执行的步骤。每个步骤包含类型、名称和特定的配置。
+   **Adding New Text Generation Steps**
 
-   **添加新的生成方法步骤**
-
-   要添加新的文本生成步骤，可以在 `steps` 列表中添加相应的配置。例如，添加一个新的API生成步骤：
+   To add a new text generation step, include the corresponding configuration in the `steps` list. For example, adding a new API generation step:
 
    ```yaml
    - type: TextGenerator
@@ -159,39 +156,35 @@
        presence_penalty: 0.0
        frequency_penalty: 0.0
        prompt: "Please generate a detailed summary based on the following input."
-   ```
+    ```
+### Input and Output Formats
 
-### 输入与输出格式
+**1. Input Format**
 
-**1. 输入格式**
+Supports multiple input and output formats, including csv, tsv, parquet, json, and jsonl formats. The framework converts different input formats into a unified dictionary format for storage, and intermediate results are output in jsonl format. The following uses the jsonl format as an example.
 
-支持多种输入输出格式，包括csv、tsv、parquet、json、jsonl格式。框架会将不同输入格式转化为统一的字典进行存储，并且中间结果的输出格式为jsonl，以下以jsonl格式为例进行介绍。
+For input JSONL files, each line contains a JSON object that describes a single data item. The JSON object should include the corresponding keys.
 
-对于输入的JSONL文件，每行包含一个JSON对象，描述单个数据项。JSON对象应包含相应的键。
-
-**生成方法对应的 JSONL 文件**
+**JSONL File for Generation Methods**
 
 ```json
-{"prompt": "请介绍一下人工智能的发展历程。"}
-{"prompt": "写一首关于春天的诗。"}
-{"prompt": "解释一下量子计算的基本原理。"}
+{"prompt": "Please introduce the development history of artificial intelligence."}
+{"prompt": "Write a poem about spring."}
+{"prompt": "Explain the basic principles of quantum computing."}
 ```
+**Key Field Descriptions**
 
-**关键字段说明**
+- **prompt**: The prompt used for text generation.
 
-- **prompt**: 用于生成文本的提示语。
+**2. Output Format**
 
-**2. 输出格式**
+The output will be saved in the `save_folder` specified in the configuration file and organized by step names.
 
-输出会保存到配置文件中指定的 `save_folder` 中，并按照步骤名称进行组织。
+**3. Intermediate Results**
 
+Intermediate results are saved in the `base_folder`, with each step creating a subfolder under this directory to store its output.
 
-**3. 中间结果**
-
-中间结果保存在 `base_folder` 中，每个步骤会在此目录下创建一个子文件夹来存储其输出。
-
-例如：
-
+For example:
 ```
 text_intermediate_results/
 ├── step_0_preprocess_format/
@@ -202,42 +195,39 @@ text_intermediate_results/
 │  ├── result.jsonl
 ```
 
-**4. 最终结果**
+**4. Final Results**
 
-最终结果会保存在 `save_folder` 中，具体内容取决于最后一个步骤的输出。例如，若最后一个步骤是本地模型生成，最终结果包括生成的文本文件。
+The final results will be saved in the `save_folder`, and the content will depend on the output of the last step. For example, if the last step is local model generation, the final results will include the generated text file.
 
 ```
 results/
 ├── generated_texts.jsonl
 ```
 
-### 示例
+### Examples
 
-1. **准备数据**
+1. **Prepare Data**
 
-   创建一个包含文本提示的JSONL文件，例如 `test_text_generation.jsonl`：
+   Create a JSONL file containing text prompts, for example, `test_text_generation.jsonl`:
 
    ```json
-   {"prompt": "请介绍一下人工智能的发展历程。"}
-   {"prompt": "写一首关于春天的诗。"}
-   {"prompt": "解释一下量子计算的基本原理。"}
-   ```
+   {"prompt": "Please introduce the development history of artificial intelligence."}
+   {"prompt": "Write a poem about spring."}
+   {"prompt": "Explain the basic principles of quantum computing."}
+    ```
+2. **Run the Program**
 
-2. **运行程序**
-
-   使用提供的示例配置文件 `config.yaml` 运行管道：
+   Run the pipeline using the provided example configuration file `config.yaml`:
 
    ```bash
    python run_pipeline.py --config config.yaml
    ```
-   如果使用APIgenerator，请首先将您的APIkey加载到您的环境变量中。
+   If using APIGenerator, make sure to load your API key into your environment variables first.
+3. **View Results**
 
-3. **查看结果**
+   The generated texts will be saved in the `text_intermediate_results/` and `results/` directories.
 
-   生成的文本将保存在 `text_intermediate_results/` 和 `results/` 目录中。
-
-### 项目结构
-
+### Project Structure
 ```
 TextGen-Project/
 ├── data/
@@ -265,19 +255,22 @@ TextGen-Project/
 ├── config.yaml
 ├── README.md
 ```
+- **data/**: Directory for storing input data.
+  - **text/**: Contains data files related to text generation.
+- **intermediate_results/**: Directory for storing intermediate results of each step.
+- **results/**: Directory for storing final generated results.
+- **src/**: Source code directory.
+  - **utils/**: Utility modules, such as registry and data processing tools.
+  - **generators/**: Text generator modules, including API-based and local model generators.
+  - **config.py**: Code related to configuration handling.
+  - **pipeline/**: Code for pipeline management and step execution.
+  - **data/**: Code for data management and dataset handling.
+- **run_pipeline.py**: Main script to run the pipeline.
+- **requirements.txt**: List of project dependencies.
+- **config.yaml**: Pipeline configuration file.
+- **README.md**: Project documentation.
 
-- **data/**: 存放输入数据的目录。
-  - **text/**: 包含文本生成相关的数据文件。
-- **intermediate_results/**: 存放各步骤中间结果的目录。
-- **results/**: 存放最终生成结果的目录。
-- **src/**: 源代码目录。
-  - **utils/**: 工具模块，如注册表和数据处理工具。
-  - **generators/**: 文本生成器模块，包括API和本地模型生成器。
-  - **config.py**: 配置相关的代码。
-  - **pipeline/**: 管道管理和步骤执行相关的代码。
-  - **data/**: 数据管理和数据集相关的代码。
-- **run_pipeline.py**: 运行管道的主脚本。
-- **requirements.txt**: 项目依赖列表。
-- **config.yaml**: 管道配置文件。
-- **README.md**: 项目说明文档。
+
+
+
 
