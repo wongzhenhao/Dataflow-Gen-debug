@@ -273,9 +273,9 @@ Create a JSONL file with image captions, for example, test_image_captioner.jsonl
 2. **Run the Pipeline**
 
 Use the provided sample configuration file config.yaml to run the pipeline:
-
+```bash
 python run_pipeline.py --config config.yaml
-
+```
 3. **View Results**
 
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
