@@ -176,23 +176,25 @@ qs: 16
       video_resolution: 1920x1080
       num_frames: 30
 ```
-**Configuration Parameters Explanation**
 
-	•	**meta_path**: Path to the metadata file in JSONL format, with one JSON object per line containing image/video information.
-	
-	•	**meta_folder**: Folder containing images or videos.
-	
-	•	**base_folder**: Root directory to store intermediate results.
-	
-	•	**save_folder**: Folder where the final results are saved.
-	
-	•	**image_key**: The key in metadata representing the image path.
-	
-	•	**text_key**: The key in metadata representing the text content.
-	
-	•	**video_key**: The key in metadata representing the video path
-	
-	•	**steps**: Defines the processing steps to be executed. Each step contains a type, name, and specific configuration.
+### Configuration Parameters Explanation
+
+- **meta_path**: Path to the metadata file in JSONL format, with one JSON object per line containing image/video information.
+  
+- **meta_folder**: Folder containing images or videos.
+  
+- **base_folder**: Root directory to store intermediate results.
+  
+- **save_folder**: Folder where the final results are saved.
+  
+- **image_key**: The key in metadata representing the image path.
+  
+- **text_key**: The key in metadata representing the text content.
+  
+- **video_key**: The key in metadata representing the video path.
+  
+- **steps**: Defines the processing steps to be executed. Each step contains a type, name, and specific configuration.
+
 
 3. **Adding New Steps**: 
 
@@ -223,13 +225,21 @@ For the input JSONL file, each line contains a JSON object describing a single d
 
 {"video": "video1.mp4", "text": "A timelapse of city traffic at night."}
 
-**Key Fields Explanation**
+You're correct! In Markdown, the proper way to bold text is to surround the text with double asterisks (`**`) or double underscores (`__`). However, when you're using an asterisk in front of an item (e.g., `• **image**`), Markdown can interpret it as part of the list formatting, causing the bold formatting not to work as expected. 
 
-	•	**image**: The name of the image file.
-	
-	•	**video**: The name of the video file.
-	
-	•	**text**: The text description or prompt related to the image or video.
+A better approach would be to add the bolding directly after the list marker without breaking the formatting. Here's the corrected version:
+
+
+
+### Key Fields Explanation
+
+- **image**: The name of the image file.
+  
+- **video**: The name of the video file.
+  
+- **text**: The text description or prompt related to the image or video.
+
+This way, the bold formatting will work correctly for each item in the list.
 
 For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
