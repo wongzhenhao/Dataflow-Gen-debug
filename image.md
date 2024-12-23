@@ -238,39 +238,28 @@ For caption generation methods, the generated results are saved in the JSONL fil
 Intermediate results are stored in the base_folder. Each step creates a subfolder under this directory to store its outputs.
 
 Example directory structure for intermediate results:
-
+```
 intermediate_results/
-
 ├── step_0_preprocess_format/
-
 │  ├── result.jsonl
-
 ├── step_1_ImageCaptioner_LLaVACaptioner/
-
 │  ├── result.jsonl
-
 ├── step_2_ImageGenerator_FLUXGenerator/
-
 │  ├── generated_images/
-
 │    ├── image1_generated.jpg
-
 │    ├── image2_generated.png
-
+```
 4. **Final Results**
 
 The final results are stored in the save_folder. The content depends on the output of the last step. For example, if the last step is image generation, the final results will include the generated image files.
 
 Example directory structure for final results:
-
+```
 results/
-
 ├── generated_images/
-
 │  ├── image1_generated.jpg
-
 │  ├── image2_generated.png
-
+```
 ### Examples
 
 1. **Prepare Data**
@@ -292,57 +281,32 @@ python run_pipeline.py --config config.yaml
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
 
 ### Project Structure
-
+```
 Dataflow-Gen/
-
 ├── data/
-
 │  ├── image/
-
 │  │  ├── test_image_captioner.jsonl
-
 │  │  ├── images/
-
 │  │    ├── cat.jpg
-
 │  │    ├── sunset.png
-
 │  ├── video/
-
 │    ├── video1.mp4
-
 ├── intermediate_results/
-
 ├── results/
-
 ├── src/
-
 │  ├── config.py
-
 │  ├── pipeline/
-
 │  │  ├── manager.py
-
 │  │  ├── steps.py
-
 │  │  ├── wrappers.py
-
 │  ├── data/
-
 │    ├── DataManager.py
-
 │    ├── Dataset.py
-
 │  ├── utils/
-
 │    ├── data_utils.py
-
 │    ├── registry.py
-
 ├── run_pipeline.py
-
 ├── requirements.txt
-
 ├── config.yaml
-
 ├── README.md
+```
