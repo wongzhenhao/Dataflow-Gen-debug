@@ -1,157 +1,156 @@
 # Video Processing Pipeline
 
-### 目录
+### Table of Contents
 
-- [视频方法概览](#视频方法概览)
-  - [视频描述生成方法](#视频描述生成方法)
-  - [视频生成方法](#视频生成方法)
-- [使用方法](#使用方法)
-  - [运行程序](#运行程序)
-  - [配置文件](#配置文件)
-  - [添加新的方法步骤](#添加新的方法步骤)
-- [输入与输出格式](#输入与输出格式)
-- [示例](#示例)
-  - [准备数据](#准备数据)
-  - [运行程序](#运行程序-1)
-  - [查看结果](#查看结果)
+- [Video Methods Overview](#video-methods-overview)
+  - [Video Captioning Methods](#video-captioning-methods)
+  - [Video Generation Methods](#video-generation-methods)
+- [Usage](#usage)
+  - [Running the Pipeline](#running-the-pipeline)
+  - [Configuration File](#configuration-file)
+  - [Adding New Steps](#adding-new-steps)
+- [Input and Output Formats](#input-and-output-formats)
+- [Examples](#examples)
+  - [Prepare Data](#prepare-data)
+  - [Run the Pipeline](#run-the-pipeline-1)
+  - [View Results](#view-results)
 
-### 视频方法概览
+### Video Methods Overview
 
-视频部分主要涵盖两大类视频处理算法：**视频描述生成**与**视频生成**。以下内容将详细介绍每类方法的具体模型、功能简介。
+This section describes two main categories of video processing algorithms: **Video Captioning** and **Video Generation**. Below are the detailed descriptions of each method, including model and functionality.
 
-**视频描述生成方法**
+**Video Captioning Methods**
 
 <table>
   <thead>
     <tr>
-      <th>名称</th>
-      <th>模型huggingface路径</th>
-      <th>简介</th>
-      <th>官方仓库或论文</th>
+      <th>Name</th>
+      <th>Model HuggingFace Path</th>
+      <th>Description</th>
+      <th>Official Repository or Paper</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>QwenVLCaptioner</td>
       <td>Qwen/Qwen2-VL-7B-Instruct</td>
-      <td>基于 Qwen2-VL 模型生成视频描述，有不同大小的模型，适用不同粒度的视频描述。</td>
-      <td><a href="https://github.com/QwenLM/Qwen2-VL">代码</a><br><a href="https://arxiv.org/pdf/2409.12191">论文</a></td>
+      <td>Generates video captions using the Qwen2-VL model, suitable for varying levels of video caption granularity.</td>
+      <td><a href="https://github.com/QwenLM/Qwen2-VL">Code</a><br><a href="https://arxiv.org/pdf/2409.12191">Paper</a></td>
     </tr>
     <tr>
       <td>LLaVANeXTVideoCaptioner</td>
       <td>llava-hf/LLaVA-NeXT-Video-7B-hf</td>
-      <td> 基于动态分辨率的 LLaVA-NeXT 模型，提升了语义复杂度的视频描述生成能力。</td>
-      <td><a href="https://github.com/LLaVA-VL/LLaVA-NeXT">代码</a><br><a href="https://llava-vl.github.io/blog/2024-01-30-llava-next/">博客</a></td>
+      <td>Uses the dynamic resolution-based LLaVA-NeXT model to improve the generation of semantically complex video captions.</td>
+      <td><a href="https://github.com/LLaVA-VL/LLaVA-NeXT">Code</a><br><a href="https://llava-vl.github.io/blog/2024-01-30-llava-next/">Blog</a></td>
     </tr>
     <tr>
       <td>LLaVAOVCaptioner</td>
       <td>llava-hf/llava-onevision-qwen2-7b-ov-hf</td>
-      <td>基于 OneVision 版本的 LLaVA 模型，在大量数据集上进行训练，优化了视觉信息处理。</td>
-      <td><a href="https://github.com/LLaVA-VL/LLaVA-NeXT">代码</a><br><a href="https://arxiv.org/abs/2408.03326">论文</a></td>
+      <td>Optimized for video processing using the OneVision version of the LLaVA model, trained on large datasets to improve visual information handling.</td>
+      <td><a href="https://github.com/LLaVA-VL/LLaVA-NeXT">Code</a><br><a href="https://arxiv.org/abs/2408.03326">Paper</a></td>
     </tr>
   </tbody>
 </table>
 
-**视频生成方法**
+**Video Generation Methods**
 
 <table>
   <thead>
     <tr>
-      <th>名称</th>
-      <th>模型huggingface路径</th>
-      <th>简介</th>
-      <th>官方仓库或论文</th>
+      <th>Name</th>
+      <th>Model HuggingFace Path</th>
+      <th>Description</th>
+      <th>Official Repository or Paper</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>FLUXGenerator</td>
       <td>black-forest-labs/FLUX.1-dev</td>
-      <td>基于 Flux 实现的视频生成方法，支持高分辨率图像生成，指令跟随能力较强。</td>
-      <td><a href="https://github.com/black-forest-labs/flux">代码</a></td>
+      <td>Generates high-resolution videos using Flux, with strong instruction-following capabilities.</td>
+      <td><a href="https://github.com/black-forest-labs/flux">Code</a></td>
     </tr>
     <tr>
       <td>StableDiffusionGenerator</td>
       <td>stabilityai/stable-diffusion-3.5-large</td>
-      <td>基于 Stable Diffusion 3 实现的视频生成方法，能够生成高质量、细节丰富的图像，速度较快。</td>
-      <td><a href="https://github.com/Stability-AI/StableDiffusion">代码</a><br><a href="https://arxiv.org/abs/2112.10752">论文</a></td>
+      <td>Generates high-quality, detailed videos based on Stable Diffusion 3, with fast inference.</td>
+      <td><a href="https://github.com/Stability-AI/StableDiffusion">Code</a><br><a href="https://arxiv.org/abs/2112.10752">Paper</a></td>
     </tr>
     <tr>
       <td>AllegroGenerator</td>
       <td>rhymes-ai/Allegro</td>
-      <td>能够根据简单的文本输入生成高质量、动态的视频，时长可达 6 秒，帧率为 15FPS，分辨率为 720p。</td>
-      <td><a href="https://github.com/rhymes-ai/Allegro">代码</a><br><a href="https://arxiv.org/abs/2410.15458">论文</a></td>
+      <td>Generates dynamic videos up to 6 seconds, with a 15 FPS frame rate and 720p resolution, based on simple text input.</td>
+      <td><a href="https://github.com/rhymes-ai/Allegro">Code</a><br><a href="https://arxiv.org/abs/2410.15458">Paper</a></td>
     </tr>
     <tr>
       <td>AnimateDiffGenerator</td>
       <td>guoyww/animatediff-motion-adapter-v1-5-2</td>
-      <td>基于Stable Diffusion及 DreamBooth、LoRA 等个性化技术实现的动画生成框架，能够为多数现有的个性化文本到图像模型一键植入动画能力</td>
-      <td><a href="https://github.com/guoyww/AnimateDiff">代码</a><br><a href="https://arxiv.org/abs/2307.04725">论文</a></td>
+      <td>A framework based on Stable Diffusion, DreamBooth, and LoRA for generating animations by embedding animation capabilities into text-to-image models.</td>
+      <td><a href="https://github.com/guoyww/AnimateDiff">Code</a><br><a href="https://arxiv.org/abs/2307.04725">Paper</a></td>
     </tr>
     <tr>
       <td>CogVideoXT2VGenerator</td>
       <td>rhymes-ai/Allegro</td>
-      <td>基于diffusion transformer构建的文本到视频生成模型，在运动表现、时长和文本-视频对齐方面优势显著</td>
-      <td><a href="https://github.com/THUDM/CogVideo">代码</a><br><a href="https://arxiv.org/abs/2408.06072">论文</a></td>
+      <td>A diffusion transformer-based model for text-to-video generation, excelling in motion representation, video duration, and text-video alignment.</td>
+      <td><a href="https://github.com/THUDM/CogVideo">Code</a><br><a href="https://arxiv.org/abs/2408.06072">Paper</a></td>
     </tr>
     <tr>
       <td>CogVideoXGenerator</td>
       <td>THUDM/CogVideoX-5b-I2V</td>
-      <td>基于diffusion transformer构建的图像到视频生成模型，在运动表现、时长和文本-视频对齐方面优势显著</td>
-      <td><a href="https://github.com/THUDM/CogVideo">代码</a><br><a href="https://arxiv.org/abs/2408.06072">论文</a></td>
+      <td>A diffusion transformer-based image-to-video generation model, excelling in motion, duration, and text-video alignment.</td>
+      <td><a href="https://github.com/THUDM/CogVideo">Code</a><br><a href="https://arxiv.org/abs/2408.06072">Paper</a></td>
     </tr>
     <tr>
       <td>I2VGenXLGenerator</td>
       <td>ali-vilab/i2vgen-xl</td>
-      <td>基于层级编码与扩散模型优化实现的视频生成方式，，最终能够依据用户输入从单张静态图像生成高质量、逼真动画且时间连贯的高清视频。</td>
-      <td><a href="https://github.com/ali-vilab/VGen">代码</a><br><a href="https://arxiv.org/abs/2311.04145">论文</a></td>
+      <td>Optimized video generation method that transforms a single static image into a high-quality, realistic animated video with continuous motion.</td>
+      <td><a href="https://github.com/ali-vilab/VGen">Code</a><br><a href="https://arxiv.org/abs/2311.04145">Paper</a></td>
     </tr>
     <tr>
       <td>ModelScopeT2VGenerator</td>
       <td>damo-vilab/text-to-video-ms-1.7b</td>
-      <td>基于 Stable Diffusion 演进而来的文本到视频合成模型，通过集成时空模块确保帧生成与运动转换效果，具备适应不同帧数的能力从而适用于多种数据集。</td>
-      <td><a href="https://github.com/ali-vilab/VGen">代码</a><br><a href="https://arxiv.org/abs/2308.06571">论文</a></td>
+      <td>A Stable Diffusion-based text-to-video model that ensures coherent frame generation and motion transitions, adaptable to different frame rates.</td>
+      <td><a href="https://github.com/ali-vilab/VGen">Code</a><br><a href="https://arxiv.org/abs/2308.06571">Paper</a></td>
     </tr>
     <tr>
       <td>SVDGenerator</td>
       <td>stabilityai/stable-video-diffusion-img2vid-xt</td>
-      <td>基于diffusion构建的视频生成方式，其模型在文本到视频、图像到视频生成及多视图任务中表现优异，可生成高质量且运动表现出色的视频。</td>
-      <td><a href="https://github.com/Stability-AI/generative-models">代码</a><br><a href="https://arxiv.org/abs/2311.15127">论文</a></td>
+      <td>A diffusion-based video generation model that excels in text-to-video, image-to-video, and multi-view tasks, producing high-quality and motion-rich videos.</td>
+      <td><a href="https://github.com/Stability-AI/generative-models">Code</a><br><a href="https://arxiv.org/abs/2311.15127">Paper</a></td>
     </tr>
   </tbody>
-  
 </table>
 
-### 使用方法
+### Usage
 
-1. **运行pipeline**: 
+1. **Running the Pipeline**: 
 
-执行起始脚本是 run_pipeline.py。此脚本根据配置文件运行整个图像处理pipeline，包括：
+The pipeline is initiated by running the script `run_pipeline.py`. This script executes the entire video processing pipeline based on the configuration file, which includes:
 
--  预处理：完成数据格式转换、数据初始化等工作，把用户的格式转化成内部处理格式。
-- 模型推理：根据用户的yaml文件依次调用不同模型进行生成。
-- 后处理：完成数据格式转化、结果保存等工作，把内部处理格式转换成用户的格式。
+- **Preprocessing**: Converts input data into the required format for the pipeline.
+- **Model Inference**: Runs the model steps as defined in the YAML configuration file.
+- **Postprocessing**: Converts the output from model inference into the final required format.
 
-**命令行运行**
+**Command-line Execution**
 
 ```bash
 python run_pipeline.py --config path/to/config.yaml
 ```
 
-2. **配置文件**
+2. **Configuration File**: 
 
-配置文件采用 YAML 格式，用于定义pipeline的输入、输出以及各个步骤的配置。
+The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
-**示例配置文件**
+**Example Configuration File**
 
 ```yaml
-meta_path: data/video/test_video_captioner.jsonl # 元数据路径，图像和视频的固定格式
-meta_folder: data/video # 仅适用于描述生成器
-base_folder: video_intermediate_results/ # 保存中间结果的路径
-save_folder: results/video_captioner # 保存生成图像的路径
-image_key: image # 元数据中图像的键
-text_key: text # 元数据中文本的键
-video_key: video # 元数据中视频的键
+meta_path: data/video/test_video_captioner.jsonl # Path to metadata file with video information
+meta_folder: data/video # Only for caption generation
+base_folder: video_intermediate_results/ # Folder to save intermediate results
+save_folder: results/video_captioner # Folder to save generated videos
+image_key: image # Key in metadata for the image
+text_key: text # Key in metadata for the text
+video_key: video # Key in metadata for the video
 
 steps:
   - type: VideoCaptioner
@@ -168,52 +167,55 @@ steps:
       repetition_penalty: 1.2
       prompt: "Please describe the video in detail."
       batch_size: 1000
+
+qs: 16
+  - type: VideoGeneration
+    name: FLUXGenerator
+    config:
+      model_path: black-forest-labs/FLUX.1-dev
+      video_resolution: 1920x1080
+      num_frames: 30
 ```
+**Configuration Parameters Explanation**
 
-**配置参数说明**
+	•	**meta_path**: Path to the metadata file in JSONL format, with one JSON object per line containing image/video information.
+	
+	•	**meta_folder**: Folder containing images or videos.
+	
+	•	**base_folder**: Root directory to store intermediate results.
+	
+	•	**save_folder**: Folder where the final results are saved.
+	
+	•	**image_key**: The key in metadata representing the image path.
+	
+	•	**text_key**: The key in metadata representing the text content.
+	
+	•	**video_key**: The key in metadata representing the video path
+	
+	•	**steps**: Defines the processing steps to be executed. Each step contains a type, name, and specific configuration.
 
-​	•	**meta_path**: 指向包含元数据的JSONL文件的路径。每行一个JSON对象，包含图像或视频的相关信息。
+3. **Adding New Steps**: 
 
-​	•	**meta_folder**: 图像或视频文件所在的文件夹路径。
+To add a new video processing step, simply add the configuration under the `steps` section. Each step can define either a **Video Captioning** or **Video Generation** method. You can also specify additional parameters required by each model.
 
-​	•	**base_folder**: 中间结果保存的根目录。
+### Input and Output Formats
 
-​	•	**save_folder**: 最终生成结果的保存目录。
+<!-- 1. **Input**:
+   - Video file paths
+   - Metadata for video processing
+   - Image-text pairs (for captioning)
 
-​	•	**image_key**: 元数据中表示图像路径的键。
+2. **Output**:
+   - Video captions (as text files)
+   - Generated video files (in formats like MP4 or GIF)
+   - Intermediate results for inspection -->
+1. **Input Format**
 
-​	•	**text_key**: 元数据中表示文本内容的键。
+The pipeline supports various input formats, including CSV, TSV, Parquet, JSON, and JSONL. The framework will convert different input formats into a unified dictionary for storage, and the intermediate output format is JSONL. Below is an explanation based on the JSONL format.
 
-​	•	**video_key**: 元数据中表示视频路径的键。
+For the input JSONL file, each line contains a JSON object describing a single data entry. Depending on the processing type, the JSON object should include the corresponding keys.
 
-​	•	**steps**: 定义需要执行的步骤。每个步骤包含类型、名称和特定的配置。
-
-**添加新的生成步骤**
-
-要添加新的处理步骤，可以在steps列表中添加相应的配置。例如，添加一个新的文本生成步骤：
-
-```yaml
-- type: TextGenerator
- name: GPTTextGenerator
- config:
-  model: gpt-4o
-  api_key: your_api_key_here
-  max_num_seqs: 512
-  temperature: 0.2
-  sys_prompt: You are an excellent assistant.
-  prompt: Generate a summary for the following content.
-  batch_size: 1
-```
-
-### 输入与输出格式
-
-**1. 输入格式**
-
-支持多种输入输出格式，包括csv、tsv、parquet、json、jsonl格式，框架会把不同输入格式转化成统一的字典进行存储，并且中间结果的输出格式为jsonl，下面以jsonl格式为例进行介绍。
-
-对于输入的JSONL文件，每行包含一个JSON对象，描述单个数据项。根据不同的处理类型，JSON对象应包含相应的键。
-
-**生成方法对应的 JSONL 文件**
+**JSONL Format for Video Captioning**
 
 {"image": "image1.jpg", "text": "A cat sitting on a windowsill."}
 
@@ -221,79 +223,39 @@ steps:
 
 {"video": "video1.mp4", "text": "A timelapse of city traffic at night."}
 
-**关键字段说明**
+**Key Fields Explanation**
 
-​	•	**image**: 图像文件的的名称。
+	•	**image**: The name of the image file.
+	
+	•	**video**: The name of the video file.
+	
+	•	**text**: The text description or prompt related to the image or video.
 
-​	•	**video**: 视频文件的名称。
+For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
-​	•	**text**: 与图像或视频相关的文本描述或提示。
+### Examples
 
-描述生成方法的格式与生成方法的格式类似，只需指明需要生成的描述的视频\视频在相应目录下的名称。
+1. **Prepare Data**
 
-**2. 输出格式**
+Ensure that your video files and metadata are organized correctly. For captioning, a JSONL file containing video file paths, captions, and additional information is expected.
 
-输出结果根据执行的步骤不同而有所不同。通常，输出会保存到配置文件中指定的save_folder中，并按照步骤名称进行组织。
+**Example Metadata File (`test_video_captioner.jsonl`)**
 
-对于描述生成方法，生成结果保存在jsonl文件用户指定的键中，例如 'text'，对于生成方法，视频\视频存放在用户指定的目录下，视频\视频的名称由用户指定。
+```json
+{"video": "videos/sample_video.mp4", "text": "A dog is running in the park.", "image": "images/frame_1.jpg"}
+```
 
-**3. 中间结果**
+2. **Run the Pipeline**
 
-中间结果保存在base_folder中，每个步骤会在此目录下创建一个子文件夹来存储其输出。
+```bash
+python run_pipeline.py --config config/video_captioner.yaml
+```
 
-例如：
+3. **View Results**
 
-intermediate_results/
+After running the pipeline, inspect the `results/video_captioner` directory for the generated captions and videos.
 
-├── step_0_preprocess_format/
-
-│  ├── result.jsonl
-
-├── step_1_VideoCaptioner_Qwen2VLCaptioner/
-
-│  ├── result.jsonl
-
-├── step_2_VideoGenerator_FLUXGenerator/
-
-│  ├── generated_images/
-
-│    ├── image1_generated.jpg
-
-│    ├── image2_generated.png
-
-**4. 最终结果**
-
-最终结果会保存在save_folder中，具体内容取决于最后一个步骤的输出。例如，若最后一个步骤是视频生成，最终结果包括生成的视频文件。
-
-results/
-
-├── generated_images/
-
-│  ├── image1_generated.jpg
-
-│  ├── image2_generated.png
-
-### 示例
-
-1. **准备数据**
-
-创建一个包含视频描述的JSONL文件，例如test_video_captioner.jsonl：
-
-{"video": "videos/girl.mp4", "text": "A girl is swinging on a swing."}
-
-{"video": "videos/dog.mp4", "text": "A puppy is chasing a soccer ball."}
-
-2. **运行程序**
-
-使用提供的示例配置文件config.yaml运行管道：
-
-python run_pipeline.py --config config.yaml
-
-3. **查看结果**
-
-生成的视频和描述将保存在intermediate_results/和results/目录中。
-
-### 项目结构
+### Project Structure
 
 Dataflow-Gen/
 
