@@ -66,7 +66,7 @@ class APIGenerator:
                     frequency_penalty = self.frequency_penalty,
             )
             content = response.choices[0].message.content
-            print(content)
+            # print(content)
             outputs.append(content)
         return outputs
 

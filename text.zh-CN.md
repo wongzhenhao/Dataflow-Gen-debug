@@ -140,6 +140,7 @@
    - **save_folder**: 最终生成结果的保存目录。
    - **text_key**: 元数据中表示文本提示的键。
    - **steps**: 定义需要执行的步骤。每个步骤包含类型、名称和特定的配置。
+   - **prompt**: 系统提示，在实际使用中，系统提示会与JSONL文件中的prompt拼接，作为模型的输入。
 
    **添加新的生成方法步骤**
 
@@ -232,7 +233,10 @@ results/
    ```
    如果使用APIgenerator，请首先将您的APIkey加载到您的环境变量中。
 
-3. **查看结果**
+3. **运行过程**
+   程序首先读取yaml文件中指定的JSONL文件，随后，启动yaml中指定的Generator，Generator组合yaml中的system prompt和JSONL文件中的prompt，传入相应的模型获得response，随后将response保存到yaml中指定的文件夹中。
+
+4. **查看结果**
 
    生成的文本将保存在 `text_intermediate_results/` 和 `results/` 目录中。
 
