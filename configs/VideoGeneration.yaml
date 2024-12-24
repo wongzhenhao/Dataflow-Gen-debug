@@ -6,6 +6,7 @@ save_folder: results/video_generator # path to save the generated images
 image_key: image # key for the image in the meta data
 text_key: text # key for the text in the meta data
 video_key: video # key for the video in the meta data
+meta_folder: data/video
 
 steps:
   - type: VideoGenerator
