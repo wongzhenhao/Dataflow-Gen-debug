@@ -216,7 +216,9 @@ steps:
 **生成方法对应的 JSONL 文件**
 
 {"id": "000000000", "video": "demo/1.mp4"}
+
 {"id": "000000001", "video": "demo/2.mp4"}
+
 {"id": "000000002", "video": "demo/3.mp4"}
 
 **关键字段说明**
@@ -278,7 +280,9 @@ results/
 创建一个包含视频描述的JSONL文件，例如test_video_captioner.jsonl：
 
 {"id": "000000000", "video": "demo/1.mp4"}
+
 {"id": "000000001", "video": "demo/2.mp4"}
+
 {"id": "000000002", "video": "demo/3.mp4"}
 
 2. **运行程序**
