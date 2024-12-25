@@ -135,7 +135,7 @@
 **命令行运行**
 
 ```bash
-python run_pipeline.py --config path/to/config.yaml
+python run_pipeline.py --config ./configs/VideoCaption.yaml
 ```
 
 2. **配置文件**
@@ -145,19 +145,19 @@ python run_pipeline.py --config path/to/config.yaml
 **示例配置文件**
 
 ```yaml
-meta_path: data/video/test_video_captioner.jsonl # 元数据路径，图像和视频的固定格式
-meta_folder: data/video # 仅适用于描述生成器
-base_folder: video_intermediate_results/ # 保存中间结果的路径
-save_folder: results/video_captioner # 保存生成图像的路径
-image_key: image # 元数据中图像的键
-text_key: text # 元数据中文本的键
-video_key: video # 元数据中视频的键
+meta_path: ./data/video/test_video_captioner.jsonl # path for the meta data, the format is fixed for image and video
+meta_folder: data/video # only for captioner
+base_folder: video_intermediate_results/ # path to save the intermediate results
+save_folder: results/video_captioner # path to save the caption
+image_key: image # key for the image in the meta data
+text_key: text # key for the text in the meta data
+video_key: video # key for the video in the meta data
 
 steps:
   - type: VideoCaptioner
     name: Qwen2VLCaptioner
     config:
-      model_path: Qwen/Qwen2-VL-7B-Instruct
+      model_path: /mnt/hwfile/mllm/niujunbo/model/Qwen/Qwen2-VL-7B-Instruct
       trust_remote_code: true
       tensor_parallel_size: 1
       max_model_len: 2048
@@ -215,11 +215,9 @@ steps:
 
 **生成方法对应的 JSONL 文件**
 
-{"image": "image1.jpg", "text": "A cat sitting on a windowsill."}
-
-{"image": "image2.png", "text": "A beautiful sunset over the mountains."}
-
-{"video": "video1.mp4", "text": "A timelapse of city traffic at night."}
+{"id": "000000000", "video": "demo/1.mp4"}
+{"id": "000000001", "video": "demo/2.mp4"}
+{"id": "000000002", "video": "demo/3.mp4"}
 
 **关键字段说明**
 
@@ -279,15 +277,15 @@ results/
 
 创建一个包含视频描述的JSONL文件，例如test_video_captioner.jsonl：
 
-{"video": "videos/girl.mp4", "text": "A girl is swinging on a swing."}
-
-{"video": "videos/dog.mp4", "text": "A puppy is chasing a soccer ball."}
+{"id": "000000000", "video": "demo/1.mp4"}
+{"id": "000000001", "video": "demo/2.mp4"}
+{"id": "000000002", "video": "demo/3.mp4"}
 
 2. **运行程序**
 
 使用提供的示例配置文件config.yaml运行管道：
 
-python run_pipeline.py --config config.yaml
+python run_pipeline.py --config ./configs/VideoCaption.yaml
 
 3. **查看结果**
 
