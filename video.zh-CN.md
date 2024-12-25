@@ -215,11 +215,13 @@ steps:
 
 **生成方法对应的 JSONL 文件**
 
+```json
 {"id": "000000000", "video": "demo/1.mp4"}
 
 {"id": "000000001", "video": "demo/2.mp4"}
 
 {"id": "000000002", "video": "demo/3.mp4"}
+```
 
 **关键字段说明**
 
@@ -243,35 +245,28 @@ steps:
 
 例如：
 
+```
 intermediate_results/
-
 ├── step_0_preprocess_format/
-
 │  ├── result.jsonl
-
 ├── step_1_VideoCaptioner_Qwen2VLCaptioner/
-
 │  ├── result.jsonl
-
 ├── step_2_VideoGenerator_FLUXGenerator/
-
 │  ├── generated_images/
-
-│    ├── image1_generated.jpg
-
-│    ├── image2_generated.png
+│  │   ├── image1_generated.jpg
+│  │   ├── image2_generated.png
+```
 
 **4. 最终结果**
 
 最终结果会保存在save_folder中，具体内容取决于最后一个步骤的输出。例如，若最后一个步骤是视频生成，最终结果包括生成的视频文件。
 
+```
 results/
-
 ├── generated_images/
-
 │  ├── image1_generated.jpg
-
 │  ├── image2_generated.png
+```
 
 ### 示例
 
@@ -279,17 +274,21 @@ results/
 
 创建一个包含视频描述的JSONL文件，例如test_video_captioner.jsonl：
 
+```json
 {"id": "000000000", "video": "demo/1.mp4"}
 
 {"id": "000000001", "video": "demo/2.mp4"}
 
 {"id": "000000002", "video": "demo/3.mp4"}
+```
 
 2. **运行程序**
 
 使用提供的示例配置文件config.yaml运行管道：
 
+```bash
 python run_pipeline.py --config ./configs/VideoCaption.yaml
+```
 
 3. **查看结果**
 
@@ -297,62 +296,35 @@ python run_pipeline.py --config ./configs/VideoCaption.yaml
 
 ### 项目结构
 
+```
 Dataflow-Gen/
-
 ├── data/
-
 │  ├── image/
-
 │  │  ├── test_image_captioner.jsonl
-
 │  │  ├── videoss/
-
 │  │    ├── cat.jpg
-
 │  │    ├── sunset.png
-
 │  ├── video/
-
 │  │  ├── test_video_captioner.jsonl
-
 │  │  ├── videos/
-
 │  │    ├── cat.mp4
-
 │  │    ├── dog.mp4
-
 ├── intermediate_results/
-
 ├── results/
-
 ├── src/
-
 │  ├── config.py
-
 │  ├── pipeline/
-
 │  │  ├── manager.py
-
 │  │  ├── steps.py
-
 │  │  ├── wrappers.py
-
 │  ├── data/
-
 │    ├── DataManager.py
-
 │    ├── Dataset.py
-
 │  ├── utils/
-
 │    ├── data_utils.py
-
 │    ├── registry.py
-
 ├── run_pipeline.py
-
 ├── requirements.txt
-
 ├── config.yaml
-
 ├── README.md
+```
