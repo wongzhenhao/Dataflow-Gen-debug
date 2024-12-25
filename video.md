@@ -134,7 +134,7 @@ The pipeline is initiated by running the script `run_pipeline.py`. This script e
 **Command-line Execution**
 
 ```bash
-python run_pipeline.py --config path/to/config.yaml
+python run_pipeline.py --config ./configs/VideoCaption.yaml
 ```
 
 2. **Configuration File**: 
@@ -143,20 +143,21 @@ The configuration file is written in YAML format and defines the pipeline’s in
 
 **Example Configuration File**
 
+
 ```yaml
-meta_path: data/video/test_video_captioner.jsonl # Path to metadata file with video information
-meta_folder: data/video # Only for caption generation
-base_folder: video_intermediate_results/ # Folder to save intermediate results
-save_folder: results/video_captioner # Folder to save generated videos
-image_key: image # Key in metadata for the image
-text_key: text # Key in metadata for the text
-video_key: video # Key in metadata for the video
+meta_path: ./data/video/test_video_captioner.jsonl # path for the meta data, the format is fixed for image and video
+meta_folder: data/video # only for captioner
+base_folder: video_intermediate_results/ # path to save the intermediate results
+save_folder: results/video_captioner # path to save the caption
+image_key: image # key for the image in the meta data
+text_key: text # key for the text in the meta data
+video_key: video # key for the video in the meta data
 
 steps:
   - type: VideoCaptioner
     name: Qwen2VLCaptioner
     config:
-      model_path: Qwen/Qwen2-VL-7B-Instruct
+      model_path: /mnt/hwfile/mllm/niujunbo/model/Qwen/Qwen2-VL-7B-Instruct
       trust_remote_code: true
       tensor_parallel_size: 1
       max_model_len: 2048
@@ -167,14 +168,6 @@ steps:
       repetition_penalty: 1.2
       prompt: "Please describe the video in detail."
       batch_size: 1000
-
-qs: 16
-  - type: VideoGeneration
-    name: FLUXGenerator
-    config:
-      model_path: black-forest-labs/FLUX.1-dev
-      video_resolution: 1920x1080
-      num_frames: 30
 ```
 
 ### Configuration Parameters Explanation
@@ -219,11 +212,13 @@ For the input JSONL file, each line contains a JSON object describing a single d
 
 **JSONL Format for Video Captioning**
 
-{"image": "image1.jpg", "text": "A cat sitting on a windowsill."}
+```json
+{"id": "000000000", "video": "demo/1.mp4"}
 
-{"image": "image2.png", "text": "A beautiful sunset over the mountains."}
+{"id": "000000001", "video": "demo/2.mp4"}
 
-{"video": "video1.mp4", "text": "A timelapse of city traffic at night."}
+{"id": "000000002", "video": "demo/3.mp4"}
+```
 
 You're correct! In Markdown, the proper way to bold text is to surround the text with double asterisks (`**`) or double underscores (`__`). However, when you're using an asterisk in front of an item (e.g., `• **image**`), Markdown can interpret it as part of the list formatting, causing the bold formatting not to work as expected. 
 
@@ -252,13 +247,17 @@ Ensure that your video files and metadata are organized correctly. For captionin
 **Example Metadata File (`test_video_captioner.jsonl`)**
 
 ```json
-{"video": "videos/sample_video.mp4", "text": "A dog is running in the park.", "image": "images/frame_1.jpg"}
+{"id": "000000000", "video": "demo/1.mp4"}
+
+{"id": "000000001", "video": "demo/2.mp4"}
+
+{"id": "000000002", "video": "demo/3.mp4"}
 ```
 
 2. **Run the Pipeline**
 
 ```bash
-python run_pipeline.py --config config/video_captioner.yaml
+python run_pipeline.py --config ./configs/VideoCaption.yaml
 ```
 
 3. **View Results**
@@ -267,62 +266,35 @@ After running the pipeline, inspect the `results/video_captioner` directory for 
 
 ### Project Structure
 
+```
 Dataflow-Gen/
-
 ├── data/
-
 │  ├── image/
-
 │  │  ├── test_image_captioner.jsonl
-
 │  │  ├── videoss/
-
 │  │    ├── cat.jpg
-
 │  │    ├── sunset.png
-
 │  ├── video/
-
 │  │  ├── test_video_captioner.jsonl
-
 │  │  ├── videos/
-
 │  │    ├── cat.mp4
-
 │  │    ├── dog.mp4
-
 ├── intermediate_results/
-
 ├── results/
-
 ├── src/
-
 │  ├── config.py
-
 │  ├── pipeline/
-
 │  │  ├── manager.py
-
 │  │  ├── steps.py
-
 │  │  ├── wrappers.py
-
 │  ├── data/
-
 │    ├── DataManager.py
-
 │    ├── Dataset.py
-
 │  ├── utils/
-
 │    ├── data_utils.py
-
 │    ├── registry.py
-
 ├── run_pipeline.py
-
 ├── requirements.txt
-
 ├── config.yaml
-
 ├── README.md
+```
