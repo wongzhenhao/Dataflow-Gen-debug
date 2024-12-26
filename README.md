@@ -56,45 +56,12 @@ conda activate dataflow-gen
 pip install -r requirements.txt
 ```
 ## Quick Start
-### Quick Evaluation:
 ```
-cd path/to/DataFlow
-python eval.py --config configs/eval/text_scorer_example1.yaml
-python eval.py --config configs/eval/image_eval_example.yaml
-python eval.py --config configs/eval/video_scorer.yaml
-```
-### Quick Process:
-```
-cd path/to/DataFlow
-python process.py --config configs/process/text_process_example.yaml
-python process.py --config configs/process/image_filter.yaml
-python process.py --config configs/process/video_process.yaml
+cd path/to/DataFlow-Gen
+python run_pipeline.py --config examples/image_demo.yaml
 ```
 
-## Jupyter Notebook Demo
-
-### Text
-
-- [Text Evaluation Demo](./demos/text_eval/text_eval_example.ipynb)
-- [文本评估示例](./demos/text_eval/text_eval_example.zh-CN.ipynb)
-- [Text Process Demo](./demos/text_process/text_process_example.ipynb)
-- [文本处理示例](./demos/text_process/text_process_example.zh-CN.ipynb)
-  
-### Image
-
-- [Image Evaluation Demo](./demos/image_eval/image_eval_example.ipynb)
-- [图片评估示例](./demos/image_eval/image_eval_example.zh-CN.ipynb)
-- [Image Process Demo](./demos/image_process/image_process_example.ipynb)
-- [图片处理示例](./demos/image_process/image_process_example.zh-CN.ipynb)
-  
-### Video
-
-- [Video Evaluation Demo](./demos/video_eval/video_eval_example.ipynb)
-- [视频评估示例](./demos/video_eval/video_eval_example.zh-CN.ipynb)
-- [Video Process Demo](./demos/video_process/video_process_example.ipynb)
-- [视频处理示例](./demos/video_process/video_process_example.zh-CN.ipynb)
-
-## Data Evaluation & Process Documentation
+## Data Generation Documentation
 
 For the usage of evaluation, please refer to the following documents👇
 
@@ -102,46 +69,16 @@ For the usage of evaluation, please refer to the following documents👇
 
 - [Text Data Evaluation User Documentation (English)](./dataflow/Eval/Text/README.md)
 - [文本数据评估使用文档 (中文)](./dataflow/Eval/Text/README.zh-CN.md)
-- [Text Data Evaluation User Documentation (English)](./dataflow/process/text/README.md)
-- [文本数据评估使用文档 (中文)](./dataflow/process/text/README.zh-CN.md)
 
 ### Image Documentation
 
 - [Image Data Evaluation User Documentation (English)](./dataflow/Eval/image/README.md)
 - [图像数据评估使用文档 (中文)](./dataflow/Eval/image/README.zh-CN.md)
-- [Image Data Process User Documentation (English)](./dataflow/process/image/README.md)
-- [图像数据处理使用文档 (中文)](./dataflow/process/image/README.zh-CN.md)
 
 ### Video Documentation
 
 - [Video Data Evaluation User Documentation (English)](./dataflow/Eval/video/README.md)
 - [视频数据评估使用文档 (中文)](./dataflow/Eval/video/README.zh-CN.md)
-- [Video Data Process User Documentation (English)](./dataflow/process/video/README.md)
-- [视频数据处理使用文档 (中文)](./dataflow/process/video/README.zh-CN.md)
 
-## Data Evaluation & Process Algorithms
-
-We summarize the SOTA algorithms from academic papers for data evaluation.
-### Text Algorithms
-
-- [Text Evaluation Algorithm Document (English)](./docs/text_metrics.md)
-- [文本算法介绍文档 (中文)](./docs/text_metrics.zh-CN.md)
-- [Text Evaluation Algorithm Document (English)](./docs/text_process.md)
-- [文本算法介绍文档 (中文)](./docs/text_process.zh-CN.md)
-
-### Image Algorithms
-
-- [Image Evaluation Algorithm Document (English)](./docs/image_metrics.md)
-- [图像数据评估使用文档 (中文)](./docs/image_metrics.zh-CN.md)
-- [Image Evaluation Algorithm Document (English)](./docs/image_process.md)
-- [图像数据评估使用文档 (中文)](./docs/image_process.zh-CN.md)
-
-### Video Algorithms
-
-- [Video Evaluation Algorithm Document (English)](./docs/video_metrics.md)
-- [视频数据评估使用文档 (中文)](./docs/video_metrics.zh-CN.md)
-- [Video Evaluation Algorithm Document (English)](./docs/video_process.md)
-- [视频数据评估使用文档 (中文)](./docs/video_process.zh-CN.md)
-
-## Awesome Data Evaluation
+## Awesome Data Generation
 - [👋 Awesome Data Evaluation](./Awesome_Data_Evaluation.md)
