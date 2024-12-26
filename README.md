@@ -69,18 +69,18 @@ For the usage of evaluation, please refer to the following documents👇
 
 ### Text Documentation
 
-- [Text Data Evaluation User Documentation (English)](./dataflow/Eval/Text/README.md)
-- [文本数据评估使用文档 (中文)](./dataflow/Eval/Text/README.zh-CN.md)
+- [Text Data Generation User Documentation (English)](./Dataflow-Gen/docs/text.md)
+- [文本数据生成使用文档 (中文)](./Dataflow-Gen/docs/text.zh-CN.md)
 
 ### Image Documentation
 
-- [Image Data Evaluation User Documentation (English)](./dataflow/Eval/image/README.md)
-- [图像数据评估使用文档 (中文)](./dataflow/Eval/image/README.zh-CN.md)
+- [Image Data Generation User Documentation (English)](./Dataflow-Gen/docs/image.md)
+- [图像数据生成使用文档 (中文)](./Dataflow-Gen/docs/image.zh-CN.md)
 
 ### Video Documentation
 
-- [Video Data Evaluation User Documentation (English)](./dataflow/Eval/video/README.md)
-- [视频数据评估使用文档 (中文)](./dataflow/Eval/video/README.zh-CN.md)
+- [Video Data Generation User Documentation (English)](./Dataflow-Gen/docs/video.md)
+- [视频数据生成使用文档 (中文)](./Dataflow-Gen/docs/video.zh-CN.md)
 
 ## Awesome Data Generation
-- [👋 Awesome Data Evaluation](./Awesome_Data_Evaluation.md)
+- [👋 Awesome Data Generation](./Awesome_Data_Generation.md)
