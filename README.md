@@ -25,8 +25,6 @@ We now support text, image, video and multimodality data types.
   - [🔥 News](#news)
   - [🛠 Installation](#installation)
   - [🚀 Quick Start](#quick-start)
-    - [Quick Evaluation](#quick-evaluation)
-    - [Quick Process](#quick-process)  
   - [💪 Jupyter Notebook Demo](#jupyter-notebook-demo)
     - [Text](#text)
     - [Image](#image)
