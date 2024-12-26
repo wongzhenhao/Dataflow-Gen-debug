@@ -1,8 +1,8 @@
-meta_path: test/text.jsonl
+meta_path: data/text/prompts.jsonl
 base_folder: text_intermediate_results/
 save_folder: results/text_generator
 image_key: image # key for the image in the meta data
-text_key: text # key for the text in the meta data
+text_key: prompt # key for the text in the meta data
 video_key: video # key for the video in the meta data
 
 steps:
