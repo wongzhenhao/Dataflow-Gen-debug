@@ -127,7 +127,7 @@ The configuration file is written in YAML format and defines the pipeline’s in
 
 **Example Configuration File**
 
-examples/image_demo.yaml
+path: examples/image_demo.yaml
 
 ```yaml
 meta_path: data/image/test_image_captioner.jsonl # Path to metadata file, with images and videos in the correct format
