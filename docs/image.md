@@ -127,64 +127,54 @@ The configuration file is written in YAML format and defines the pipeline’s in
 
 **Example Configuration File**
 
-path: examples/image_demo.yaml
+path: configs/ImageCaption.yaml
 
 ```yaml
-meta_path: data/image/test_image_captioner.jsonl # Path to metadata file, with images and videos in the correct format
-meta_folder: data/image # Only for caption generation
-base_folder: intermediate_results/ # Folder to save intermediate results
-save_folder: results/ # Folder to save generated images
-image_key: image # Key in metadata representing the image
-text_key: text # Key in metadata representing the text
-video_key: video # Key in metadata representing the video
+# example yaml file
+
+meta_path: data/image/test_image_captioner.jsonl # path for the meta data, the format is fixed for image and video
+meta_folder: data/image # only for captioner
+base_folder: image_intermediate_results/ # path to save the intermediate results
+save_folder: results/image_captioner # path to save the generated images
+image_key: image # key for the image in the meta data
+text_key: text # key for the text in the meta data
+video_key: video # key for the video in the meta data
 
 steps:
- - type: ImageCaptioner
-   name: LLaVACaptioner
-   config: 
-     model_path: /mnt/petrelfs/liuzheng/cjz/llava-1.5-7b-hf
-     trust_remote_code: true
-     tensor_parallel_size: 2
-     max_model_len: 2048
-     max_num_seqs: 128
-     temperature: 0.7
-     top_p: 0.9
-     top_k: 50
-     repetition_penalty: 1.2
-     prompt: What is the content of this image?
-     repeat_time: 5
-     batch_size: 1000
- - type: ImageGenerator
-   name: FLUXGenerator
-   config:
-     model_path: black-forest-labs/FLUX.1-dev
-     height: 1024
-     width: 1024
-     guidance_scale: 4.5
-     num_inference_steps: 50
-     max_sequence_length: 512
-     batch_size: 1
-     device: cuda
- - type: other
+  - type: ImageCaptioner
+    name: LLaVACaptioner
+    config: 
+      model_path: /mnt/petrelfs/liuzheng/cjz/llava-1.5-7b-hf
+      trust_remote_code: true
+      tensor_parallel_size: 2
+      max_model_len: 2048
+      max_num_seqs: 128
+      temperature: 0.7
+      top_p: 0.9
+      top_k: 50
+      repetition_penalty: 1.2
+      prompt: What is the content of this image?
+      repeat_time: 5
+      batch_size: 1000
 ```
 
 **Configuration Parameters Explanation**
 
-	•	**meta_path**: Path to the metadata file in JSONL format, with one JSON object per line containing image/video information.
+**meta_path**: Path to the metadata file in JSONL format, with one JSON object per line containing image/video information.
 	
-	•	**meta_folder**: Folder containing images or videos.
+**meta_folder**: Folder containing images or videos.
 	
-	•	**base_folder**: Root directory to store intermediate results.
+**base_folder**: Root directory to store intermediate results.
 	
-	•	**save_folder**: Folder where the final results are saved.
+**save_folder**: Folder where the final results are saved.
 	
-	•	**image_key**: The key in metadata representing the image path.
+**image_key**: The key in metadata representing the image path.
 	
-	•	**text_key**: The key in metadata representing the text content.
+**text_key**: The key in metadata representing the text content.
 	
-	•	**video_key**: The key in metadata representing the video path
+**video_key**: The key in metadata representing the video path
 	
-	•	**steps**: Defines the processing steps to be executed. Each step contains a type, name, and specific configuration.
+**steps**: Defines the processing steps to be executed. Each step contains a type, name, and specific configuration.
 
 3. **Adding New Steps**
 
