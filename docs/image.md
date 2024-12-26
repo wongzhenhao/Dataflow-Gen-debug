@@ -1,25 +1,25 @@
 # Image Processing Pipeline
 
-### Table of Contents
+## Table of Contents
 
 - [Image Methods Overview](#image-methods-overview)
   - [Image Captioning Methods](#image-captioning-methods)
   - [Image Generation Methods](#image-generation-methods)
 - [Usage](#usage)
   - [Running the Pipeline](#running-the-pipeline)
+  - [Command-line Execution](#command-line-execution)
   - [Configuration File](#configuration-file)
-  - [Adding New Steps](#adding-new-steps)
 - [Input and Output Formats](#input-and-output-formats)
 - [Examples](#examples)
   - [Prepare Data](#prepare-data)
   - [Run the Pipeline](#run-the-pipeline-1)
   - [View Results](#view-results)
 
-### Image Methods Overview
+## Image Methods Overview
 
 This section covers two main categories of image processing algorithms: **Image Captioning** and **Image Generation**. Below are the detailed descriptions of each method, including model and functionality.
 
-**Image Captioning Methods**
+### Image Captioning Methods
 
 <table>
   <thead>
@@ -77,7 +77,7 @@ This section covers two main categories of image processing algorithms: **Image 
 </table>
 
 
-**Image Generation Methods**
+### Image Generation Methods
 
 <table>
   <thead>
@@ -105,9 +105,9 @@ This section covers two main categories of image processing algorithms: **Image 
 </table>
 
 
-### Usage
+## Usage
 
-1. **Running the Pipeline**: 
+### Running the Pipeline
 
 The pipeline is initiated by running the script `run_pipeline.py`. This script executes the entire image processing pipeline based on the configuration file, which includes:
 
@@ -115,13 +115,13 @@ The pipeline is initiated by running the script `run_pipeline.py`. This script e
 - **Model Inference**: Runs the model steps as defined in the YAML configuration file.
 - **Postprocessing**: Converts the output from model inference into the final required format.
 
-**Command-line Execution**
+### Command-line Execution
 
 ```bash
 python run_pipeline.py --config configs/ImageCaption.yaml
 ```
 
-2. **Configuration File**: 
+### Configuration File
 
 The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
@@ -176,7 +176,7 @@ steps:
 	
 **steps**: Defines the processing steps to be executed. Each step contains a type, name, and specific configuration.
 
-3. **Adding New Steps**
+**Adding New Steps**
 
 To add a new processing step, simply add the corresponding configuration in the `steps` list. For example, to add a new text generation step:
 
@@ -272,33 +272,3 @@ python run_pipeline.py --config configs/ImageCaption.yaml
 
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
 
-### Project Structure
-```
-Dataflow-Gen/
-├── data/
-│  ├── image/
-│  │  ├── test_image_captioner.jsonl
-│  │  ├── images/
-│  │    ├── cat.jpg
-│  │    ├── sunset.png
-│  ├── video/
-│    ├── video1.mp4
-├── intermediate_results/
-├── results/
-├── src/
-│  ├── config.py
-│  ├── pipeline/
-│  │  ├── manager.py
-│  │  ├── steps.py
-│  │  ├── wrappers.py
-│  ├── data/
-│    ├── DataManager.py
-│    ├── Dataset.py
-│  ├── utils/
-│    ├── data_utils.py
-│    ├── registry.py
-├── run_pipeline.py
-├── requirements.txt
-├── config.yaml
-├── README.md
-```
