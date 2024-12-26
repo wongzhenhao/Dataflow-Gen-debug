@@ -15,11 +15,11 @@
   - [Run the Pipeline](#run-the-pipeline-1)
   - [View Results](#view-results)
 
-## Image Methods Overview
+## 1 Image Methods Overview
 
 This section covers two main categories of image processing algorithms: **Image Captioning** and **Image Generation**. Below are the detailed descriptions of each method, including model and functionality.
 
-### Image Captioning Methods
+### 1.1 Image Captioning Methods
 
 <table>
   <thead>
@@ -77,7 +77,7 @@ This section covers two main categories of image processing algorithms: **Image 
 </table>
 
 
-### Image Generation Methods
+### 1.2 Image Generation Methods
 
 <table>
   <thead>
@@ -105,9 +105,9 @@ This section covers two main categories of image processing algorithms: **Image 
 </table>
 
 
-## Usage
+## 2 Usage
 
-### Running the Pipeline
+### 2.1 Running the Pipeline
 
 The pipeline is initiated by running the script `run_pipeline.py`. This script executes the entire image processing pipeline based on the configuration file, which includes:
 
@@ -115,13 +115,13 @@ The pipeline is initiated by running the script `run_pipeline.py`. This script e
 - **Model Inference**: Runs the model steps as defined in the YAML configuration file.
 - **Postprocessing**: Converts the output from model inference into the final required format.
 
-### Command-line Execution
+### 2.2 Command-line Execution
 
 ```bash
 python run_pipeline.py --config configs/ImageCaption.yaml
 ```
 
-### Configuration File
+### 2.3 Configuration File
 
 The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
@@ -193,9 +193,9 @@ To add a new processing step, simply add the corresponding configuration in the 
   batch_size: 1
 ```
 
-## Input and Output Formats
+## 3 Input and Output Formats
 
-### Input Format
+### 3.1 Input Format
 
 The pipeline supports various input formats, including CSV, TSV, Parquet, JSON, and JSONL. The framework will convert different input formats into a unified dictionary for storage, and the intermediate output format is JSONL. Below is an explanation based on the JSONL format.
 
@@ -219,13 +219,13 @@ For the input JSONL file, each line contains a JSON object describing a single d
 
 For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
-### Output Format
+### 3.2 Output Format
 
 The output format depends on the steps executed. Typically, results are saved in the folder specified by save_folder in the configuration file, and they are organized by step name.
 
 For caption generation methods, the generated results are saved in the JSONL file under the user-specified key (e.g., ‘text’), while for image generation methods, the images/videos are stored in the specified directory.
 
-### Intermediate Results
+### 3.3 Intermediate Results
 
 Intermediate results are stored in the base_folder. Each step creates a subfolder under this directory to store its outputs.
 
@@ -241,7 +241,7 @@ intermediate_results/
 │    ├── image1_generated.jpg
 │    ├── image2_generated.png
 ```
-### Final Results
+### 3.4 Final Results
 
 The final results are stored in the save_folder. The content depends on the output of the last step. For example, if the last step is image generation, the final results will include the generated image files.
 
@@ -253,9 +253,9 @@ results/
 │  ├── image2_generated.png
 ```
 
-## Examples
+## 4 Examples
 
-### Prepare Data
+### 4.1 Prepare Data
 
 Create a JSONL file with image captions, for example, test_image_captioner.jsonl:
 
@@ -263,13 +263,13 @@ Create a JSONL file with image captions, for example, test_image_captioner.jsonl
 
 {"image": "images/sunset.png", "text": "A beautiful sunset over the mountains."}
 
-### Run the Pipeline
+### 4.2 Run the Pipeline
 
 Use the provided sample configuration file config.yaml to run the pipeline:
 ```bash
 python run_pipeline.py --config configs/ImageCaption.yaml
 ```
-### View Results
+### 4.3 View Results
 
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
 
