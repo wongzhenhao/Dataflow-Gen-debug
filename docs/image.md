@@ -126,7 +126,9 @@ python run_pipeline.py --config path/to/config.yaml
 The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
 **Example Configuration File**
+
 examples/image_demo.yaml
+
 ```yaml
 meta_path: data/image/test_image_captioner.jsonl # Path to metadata file, with images and videos in the correct format
 meta_folder: data/image # Only for caption generation
