@@ -193,9 +193,9 @@ To add a new processing step, simply add the corresponding configuration in the 
   batch_size: 1
 ```
 
-### Input and Output Formats
+## Input and Output Formats
 
-1. **Input Format**
+### Input Format
 
 The pipeline supports various input formats, including CSV, TSV, Parquet, JSON, and JSONL. The framework will convert different input formats into a unified dictionary for storage, and the intermediate output format is JSONL. Below is an explanation based on the JSONL format.
 
@@ -219,13 +219,13 @@ For the input JSONL file, each line contains a JSON object describing a single d
 
 For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
-2. **Output Format**
+### Output Format
 
 The output format depends on the steps executed. Typically, results are saved in the folder specified by save_folder in the configuration file, and they are organized by step name.
 
 For caption generation methods, the generated results are saved in the JSONL file under the user-specified key (e.g., ‘text’), while for image generation methods, the images/videos are stored in the specified directory.
 
-3.  **Intermediate Results**
+### Intermediate Results
 
 Intermediate results are stored in the base_folder. Each step creates a subfolder under this directory to store its outputs.
 
@@ -241,7 +241,7 @@ intermediate_results/
 │    ├── image1_generated.jpg
 │    ├── image2_generated.png
 ```
-4. **Final Results**
+### Final Results
 
 The final results are stored in the save_folder. The content depends on the output of the last step. For example, if the last step is image generation, the final results will include the generated image files.
 
@@ -252,9 +252,10 @@ results/
 │  ├── image1_generated.jpg
 │  ├── image2_generated.png
 ```
-### Examples
 
-1. **Prepare Data**
+## Examples
+
+### Prepare Data
 
 Create a JSONL file with image captions, for example, test_image_captioner.jsonl:
 
@@ -262,13 +263,13 @@ Create a JSONL file with image captions, for example, test_image_captioner.jsonl
 
 {"image": "images/sunset.png", "text": "A beautiful sunset over the mountains."}
 
-2. **Run the Pipeline**
+### Run the Pipeline
 
 Use the provided sample configuration file config.yaml to run the pipeline:
 ```bash
 python run_pipeline.py --config configs/ImageCaption.yaml
 ```
-3. **View Results**
+### View Results
 
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
 
