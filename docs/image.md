@@ -126,7 +126,7 @@ python run_pipeline.py --config path/to/config.yaml
 The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
 **Example Configuration File**
-
+examples/image_demo.yaml
 ```yaml
 meta_path: data/image/test_image_captioner.jsonl # Path to metadata file, with images and videos in the correct format
 meta_folder: data/image # Only for caption generation
@@ -274,7 +274,7 @@ Create a JSONL file with image captions, for example, test_image_captioner.jsonl
 
 Use the provided sample configuration file config.yaml to run the pipeline:
 ```bash
-python run_pipeline.py --config config.yaml
+python run_pipeline.py --config examples/image_demo.yaml
 ```
 3. **View Results**
 
