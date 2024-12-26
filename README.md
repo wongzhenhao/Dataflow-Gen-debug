@@ -52,8 +52,11 @@ We now support text, image, video and multimodality data types.
 - [2024-12-27] 🎉 Our first data-centric evaluation system is now open source.
 
 ## Installation
-
-
+```bash
+conda create -n dataflow-gen python=3.10 -y
+conda activate dataflow-gen
+pip install -r requirements.txt
+```
 ## Quick Start
 ### Quick Evaluation:
 ```
