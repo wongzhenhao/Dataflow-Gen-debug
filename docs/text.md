@@ -69,7 +69,7 @@ The text generation section mainly covers two categories of text generation algo
    **Command Line Execution**
 
    ```bash
-   python run_pipeline.py --config path/to/config.yaml
+    python run_pipeline.py --config configs/TextGeneration.yaml
    ```
 
 2. **Configuration File**
@@ -228,7 +228,7 @@ results/
    Run the pipeline using the provided example configuration file `config.yaml`:
 
    ```bash
-   python run_pipeline.py --config config.yaml
+   python run_pipeline.py --config examples/TextGenerator.yaml
    ```
    
    If using `APIGenerator`, make sure to load your API key into your environment variables first.

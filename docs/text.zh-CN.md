@@ -69,7 +69,7 @@
    **命令行运行**
 
    ```bash
-   python run_pipeline.py --config path/to/config.yaml
+   python run_pipeline.py --config configs/TextGeneration.yaml
    ```
 
 2. **配置文件**
@@ -229,7 +229,7 @@ results/
    使用提供的示例配置文件 `config.yaml` 运行管道：
 
    ```bash
-   python run_pipeline.py --config config.yaml
+   python run_pipeline.py --config examples/TextGenerator.yaml
    ```
    如果使用APIgenerator，请首先将您的APIkey加载到您的环境变量中。
 
