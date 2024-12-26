@@ -58,7 +58,9 @@ pip install -r requirements.txt
 ## Quick Start
 ```
 cd path/to/DataFlow-Gen
-python run_pipeline.py --config examples/image_demo.yaml
+python run_pipeline.py --config configs/TextGeneration.yaml
+python run_pipeline.py --config configs/ImageCaption.yaml
+python run_pipeline.py --config configs/VideoCaption.yaml
 ```
 
 ## Data Generation Documentation
