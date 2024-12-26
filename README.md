@@ -48,94 +48,11 @@ We now support text, image, video and multimodality data types.
 | **Data Evaluation** | ✅    | ✅     | ✅     | ✅               | ✅               |
 
 ## News
-
-- [2024-10-14] 🎉 We summarize data evaluation papers and codes in [👋 Awesome Data Evaluation](./Awesome_Data_Evaluation.md)
-- [2024-10-14] 🎉 Our first data-centric evaluation system is now open source.
+- [2024-10-14] 🎉 We summarize data evaluation papers and codes in [👋 Awesome Data Generation](./Awesome_Data_Generation.md)
+- [2024-12-27] 🎉 Our first data-centric evaluation system is now open source.
 
 ## Installation
 
-
-For environment setup, please using the following commands👇
-
-```
-conda create -n dataflow python=3.9
-conda activate dataflow
-pip install -e .
-```
-
-If you want to evaluate each modality of data, please use the following commands:
-<details>
-<summary>
-<b>text data eval</b>
-</summary>
-<p>
-
-```bash
-pip install -e .[text]
-pip install flash-attn==2.6.3
-python -m spacy download en_core_web_sm
-```
-
-</p>
-</details>
-
-<details>
-<summary>
-<b>image data eval</b>
-</summary>
-<p>
-
-```bash
-pip install -e .[image]
-pip install pyiqa==0.1.12
-pip install transformers==4.44.2
-```
-
-</p>
-</details>
-
-
-<details>
-<summary>
-<b>video data eval</b>
-</summary>
-<p>
-
-```bash
-pip install -e .[video]
-```
-When evaluating video-caption data, please run the following command to install modified CLIP for EMScore:
-```
-pip install git+https://github.com/MOLYHECI/CLIP.git
-```
-
-</p>
-</details>
-
-<details>
-<summary>
-<b>All dependencies</b>
-</summary>
-<p>
-
-```bash
-pip install -e .[all]
-pip install flash-attn==2.6.3
-pip install pyiqa==0.1.12
-pip install transformers==4.44.2
-```
-
-</p>
-</details>
-
-Please refer to Data Evaluation Documentation for config file usage. Use the following command to run with the config file
-
-```
-python main.py --config [your config file]
-```
-<p align="center">
-  <img src="./static/images/example_1.png">
-</p>
 
 ## Quick Start
 ### Quick Evaluation:
