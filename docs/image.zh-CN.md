@@ -126,6 +126,8 @@ python run_pipeline.py --config path/to/config.yaml
 
 **示例配置文件**
 
+路径: examples/image_demo.yaml
+
 ```yaml
 meta_path: data/image/test_image_captioner.jsonl # 元数据路径，图像和视频的固定格式
 meta_folder: data/image # 仅适用于描述生成器
@@ -280,9 +282,9 @@ results/
 
 2. **运行程序**
 
-使用提供的示例配置文件config.yaml运行管道：
+使用提供的示例配置文件config.yaml运行程序：
 
-python run_pipeline.py --config config.yaml
+python run_pipeline.py --config examples/image_demo.yaml
 
 3. **查看结果**
 
