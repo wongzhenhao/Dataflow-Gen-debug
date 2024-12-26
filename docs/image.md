@@ -118,7 +118,7 @@ The pipeline is initiated by running the script `run_pipeline.py`. This script e
 **Command-line Execution**
 
 ```bash
-python run_pipeline.py --config path/to/config.yaml
+python run_pipeline.py --config configs/ImageCaption.yaml
 ```
 
 2. **Configuration File**: 
@@ -276,7 +276,7 @@ Create a JSONL file with image captions, for example, test_image_captioner.jsonl
 
 Use the provided sample configuration file config.yaml to run the pipeline:
 ```bash
-python run_pipeline.py --config examples/image_demo.yaml
+python run_pipeline.py --config configs/ImageCaption.yaml
 ```
 3. **View Results**
 
