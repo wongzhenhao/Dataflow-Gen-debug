@@ -5,6 +5,7 @@
 - [Usage](#2-usage)
 - [Input and Output Formats](#3-input-and-output-formats)
 - [Examples](#4-examples)
+- [Project Structure](#5-project-structure)
 
 ### 1 Image Methods Overview
 
@@ -261,3 +262,33 @@ python run_pipeline.py --config configs/ImageCaption.yaml
 
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
 
+## 5 Project Structure
+```
+Dataflow-Gen/
+├── data/
+│  ├── image/
+│  │  ├── test_image_captioner.jsonl
+│  │  ├── images/
+│  │    ├── cat.jpg
+│  │    ├── sunset.png
+│  ├── video/
+│    ├── video1.mp4
+├── intermediate_results/
+├── results/
+├── src/
+│  ├── config.py
+│  ├── pipeline/
+│  │  ├── manager.py
+│  │  ├── steps.py
+│  │  ├── wrappers.py
+│  ├── data/
+│    ├── DataManager.py
+│    ├── Dataset.py
+│  ├── utils/
+│    ├── data_utils.py
+│    ├── registry.py
+├── run_pipeline.py
+├── requirements.txt
+├── config.yaml
+├── README.md
+```
