@@ -14,9 +14,9 @@
     <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/Open-DataFlow/Dataflow-Gen" />
 </a>
 
-DataFlow-Eval is a data evaluation system to evaluate data quality from multiple dimensions. We mainly support SOTA algorithms within academic papers with strong theoretical support.
+DataFlow-Eval is a data generation system to generate high-quality data automatically. We mainly support SOTA algorithms within academic papers with strong theoretical support.
 
-We now support text, image, video and multimodality data types.
+We now support text, image, video, and multimodality data types.
 
 ## Table of Contents
 - [DataFlow-Eval](#dataflow-eval)
@@ -46,8 +46,7 @@ We now support text, image, video and multimodality data types.
 | **Data Evaluation** | ✅    | ✅     | ✅     | ✅               | ✅               |
 
 ## News
-- [2024-10-14] 🎉 We summarize data evaluation papers and codes in [👋 Awesome Data Generation](./Awesome_Data_Generation.md)
-- [2024-12-27] 🎉 Our first data-centric evaluation system is now open source.
+- [2024-12-27] 🎉 Our first data generation system is now open source.
 
 ## Installation
 ```bash
@@ -60,7 +59,9 @@ pip install -r requirements.txt
 cd path/to/DataFlow-Gen
 python run_pipeline.py --config configs/TextGeneration.yaml # Text Generation
 python run_pipeline.py --config configs/ImageCaption.yaml # Image Captioning
+python run_pipeline.py --config configs/ImageGeneration.yaml # Image Generation
 python run_pipeline.py --config configs/VideoCaption.yaml # Video Captioning
+python run_pipeline.py --config configs/VideoGeneration.yaml # Video Generation
 ```
 
 ## Data Generation Documentation
