@@ -247,11 +247,10 @@ results/
 ### 4.1 Prepare Data
 
 Create a JSONL file with image captions, for example, test_image_captioner.jsonl:
-
+```
 {"image": "images/cat.jpg", "text": "A cat sitting on a windowsill."}
-
 {"image": "images/sunset.png", "text": "A beautiful sunset over the mountains."}
-
+```
 ### 4.2 Run the Pipeline
 
 Use the provided sample configuration file config.yaml to run the pipeline:
