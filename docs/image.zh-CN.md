@@ -1,21 +1,13 @@
 # Image Processing Pipeline
 
-### 目录
+## 目录
 
-- [图片方法概览](#图片方法概览)
-  - [图片描述生成方法](#图片描述生成方法)
-  - [图片生成方法](#图片生成方法)
-- [使用方法](#使用方法)
-  - [运行程序](#运行程序)
-  - [配置文件](#配置文件)
-  - [添加新的方法步骤](#添加新的方法步骤)
-- [输入与输出格式](#输入与输出格式)
-- [示例](#示例)
-  - [准备数据](#准备数据)
-  - [运行程序](#运行程序-1)
-  - [查看结果](#查看结果)
+- [图片方法概览](#1-图片方法概览)
+- [使用方法](#2-使用方法)
+- [输入与输出格式](#3-输入与输出格式)
+- [示例](#4-示例)
 
-### 图片方法概览
+## 1 图片方法概览
 
 图片部分主要涵盖两大类图片处理算法：**图片描述生成**与**图片生成**。以下内容将详细介绍每类方法的具体模型、功能简介。
 
@@ -104,9 +96,9 @@
   </tbody>
 </table>
 
-### 使用方法
+## 2 使用方法
 
-1. **运行pipeline**: 
+### 2.1 运行pipeline
 
 执行起始脚本是 run_pipeline.py。此脚本根据配置文件运行整个图像处理pipeline，包括：
 
@@ -114,13 +106,13 @@
 - 模型推理：根据用户的yaml文件依次调用不同模型进行生成。
 - 后处理：完成数据格式转化、结果保存等工作，把内部处理格式转换成用户的格式。
 
-**命令行运行**
+### 2.2 命令行运行
 
 ```bash
 python run_pipeline.py --config path/to/config.yaml
 ```
 
-2. **配置文件**
+### 2.3 配置文件
 
 配置文件采用 YAML 格式，用于定义pipeline的输入、输出以及各个步骤的配置。
 
@@ -202,9 +194,9 @@ steps:
   batch_size: 1
 ```
 
-### 输入与输出格式
+## 输入与输出格式
 
-**1. 输入格式**
+### 3.1 输入格式
 
 支持多种输入输出格式，包括csv、tsv、parquet、json、jsonl格式，框架会把不同输入格式转化成统一的字典进行存储，并且中间结果的输出格式为jsonl，下面以jsonl格式为例进行介绍。
 
@@ -228,13 +220,13 @@ steps:
 
 描述生成方法的格式与生成方法的格式类似，只需指明需要生成的描述的图片\视频在相应目录下的名称。
 
-**2. 输出格式**
+### 3.2 输出格式
 
 输出结果根据执行的步骤不同而有所不同。通常，输出会保存到配置文件中指定的save_folder中，并按照步骤名称进行组织。
 
 对于描述生成方法，生成结果保存在jsonl文件用户指定的键中，例如 'text'，对于生成方法，图片\视频存放在用户指定的目录下，图片\视频的名称由用户指定。
 
-**3. 中间结果**
+### 3.3 中间结果
 
 中间结果保存在base_folder中，每个步骤会在此目录下创建一个子文件夹来存储其输出。
 
@@ -258,7 +250,7 @@ intermediate_results/
 
 │    ├── image2_generated.png
 
-**4. 最终结果**
+### 3.4 最终结果
 
 最终结果会保存在save_folder中，具体内容取决于最后一个步骤的输出。例如，若最后一个步骤是图像生成，最终结果包括生成的图像文件。
 
@@ -270,9 +262,9 @@ results/
 
 │  ├── image2_generated.png
 
-### 示例
+## 4 示例
 
-1. **准备数据**
+### 4.1 准备数据
 
 创建一个包含图像描述的JSONL文件，例如test_image_captioner.jsonl：
 
@@ -280,69 +272,12 @@ results/
 
 {"image": "images/sunset.png", "text": "A beautiful sunset over the mountains."}
 
-2. **运行程序**
+### 4.2 运行程序
 
 使用提供的示例配置文件config.yaml运行程序：
 
 python run_pipeline.py --config examples/image_demo.yaml
 
-3. **查看结果**
+### 4.3 查看结果
 
 生成的图像和描述将保存在intermediate_results/和results/目录中。
-
-### 项目结构
-
-Dataflow-Gen/
-
-├── data/
-
-│  ├── image/
-
-│  │  ├── test_image_captioner.jsonl
-
-│  │  ├── images/
-
-│  │    ├── cat.jpg
-
-│  │    ├── sunset.png
-
-│  ├── video/
-
-│    ├── video1.mp4
-
-├── intermediate_results/
-
-├── results/
-
-├── src/
-
-│  ├── config.py
-
-│  ├── pipeline/
-
-│  │  ├── manager.py
-
-│  │  ├── steps.py
-
-│  │  ├── wrappers.py
-
-│  ├── data/
-
-│    ├── DataManager.py
-
-│    ├── Dataset.py
-
-│  ├── utils/
-
-│    ├── data_utils.py
-
-│    ├── registry.py
-
-├── run_pipeline.py
-
-├── requirements.txt
-
-├── config.yaml
-
-├── README.md
-
