@@ -29,7 +29,6 @@ We now support text, image, video, and multimodality data types.
     - [Text Documentation](#text-documentation)
     - [Image Documentation](#image-documentation)
     - [Video Documentation](#video-documentation)
-  - [👋 Awesome Data Evaluation](#awesome-data-evaluation)
 
 ## Module and Modality Support
 
@@ -75,5 +74,3 @@ For the usage of evaluation, please refer to the following documents👇
 - [Video Data Generation User Documentation (English)](./Dataflow-Gen/docs/video.md)
 - [视频数据生成使用文档 (中文)](./Dataflow-Gen/docs/video.zh-CN.md)
 
-## Awesome Data Generation
-- [👋 Awesome Data Generation](./Awesome_Data_Generation.md)
