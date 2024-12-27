@@ -1,21 +1,13 @@
 # Video Processing Pipeline
 
-### Table of Contents
+## Table of Contents
+- [Video Methods Overview](#1-video-methods-overview)
+- [Usage](#2-usage)
+- [Input and Output Formats](#3-input-and-output-formats)
+- [Examples](#4-examples)
+- [Project Structure](#5-project-structure)
 
-- [Video Methods Overview](#video-methods-overview)
-  - [Video Captioning Methods](#video-captioning-methods)
-  - [Video Generation Methods](#video-generation-methods)
-- [Usage](#usage)
-  - [Running the Pipeline](#running-the-pipeline)
-  - [Configuration File](#configuration-file)
-  - [Adding New Steps](#adding-new-steps)
-- [Input and Output Formats](#input-and-output-formats)
-- [Examples](#examples)
-  - [Prepare Data](#prepare-data)
-  - [Run the Pipeline](#run-the-pipeline-1)
-  - [View Results](#view-results)
-
-### Video Methods Overview
+## 1 Video Methods Overview
 
 This section describes two main categories of video processing algorithms: **Video Captioning** and **Video Generation**. Below are the detailed descriptions of each method, including model and functionality.
 
@@ -121,9 +113,9 @@ This section describes two main categories of video processing algorithms: **Vid
   </tbody>
 </table>
 
-### Usage
+## 2 Usage
 
-1. **Running the Pipeline**: 
+### 2.1 Running the Pipeline
 
 The pipeline is initiated by running the script `run_pipeline.py`. This script executes the entire video processing pipeline based on the configuration file, which includes:
 
@@ -137,7 +129,7 @@ The pipeline is initiated by running the script `run_pipeline.py`. This script e
 python run_pipeline.py --config ./configs/VideoCaption.yaml
 ```
 
-2. **Configuration File**: 
+### 2.2 Configuration File
 
 The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
@@ -226,7 +218,7 @@ A better approach would be to add the bolding directly after the list marker wit
 
 
 
-### Key Fields Explanation
+## 3 Key Fields Explanation
 
 - **image**: The name of the image file.
   
@@ -238,9 +230,9 @@ This way, the bold formatting will work correctly for each item in the list.
 
 For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
-### Examples
+## 4 Examples
 
-1. **Prepare Data**
+### 4.1 Prepare Data
 
 Ensure that your video files and metadata are organized correctly. For captioning, a JSONL file containing video file paths, captions, and additional information is expected.
 
@@ -254,17 +246,17 @@ Ensure that your video files and metadata are organized correctly. For captionin
 {"id": "000000002", "video": "demo/3.mp4"}
 ```
 
-2. **Run the Pipeline**
+### 4.2 Run the Pipeline
 
 ```bash
 python run_pipeline.py --config ./configs/VideoCaption.yaml
 ```
 
-3. **View Results**
+### 4.3 View Results
 
 After running the pipeline, inspect the `results/video_captioner` directory for the generated captions and videos.
 
-### Project Structure
+## 5 Project Structure
 
 ```
 Dataflow-Gen/
