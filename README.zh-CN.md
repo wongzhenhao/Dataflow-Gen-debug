@@ -20,36 +20,27 @@ DataFlow-Gen是一个自动合成多模态数据的工具。 我们主要支持�
 我们目前支持文本，图像，视频三个模态。
 
 ## Table of Contents
-- [DataFlow-Eval](#dataflow-eval)
-  - [Table of Contents](#table-of-contents)
-  - [Module and Modality Support](#module-and-modality-support)
-  - [🔥 News](#news)
-  - [🛠 Installation](#installation)
+- [DataFlow-Gen](#dataflow-gen)
+  - [目录](#目录)
+  - [支持的模态](#支持的模态)
+  - [🔥 新闻](#新闻)
+  - [🛠 安装](#安装)
   - [🚀 Quick Start](#quick-start)
-  - [💪 Jupyter Notebook Demo](#jupyter-notebook-demo)
-    - [Text](#text)
-    - [Image](#image)
-    - [Video](#video)
-  - [📌 Data Evaluation Documentation](#data-evaluation-documentation)
+  - [📌 数据生成文档](#数据生成文档)
     - [Text Documentation](#text-documentation)
     - [Image Documentation](#image-documentation)
     - [Video Documentation](#video-documentation)
-  - [🧠 Data Evaluation Algorithms](#data-evaluation-algorithms)
-    - [Text Algorithms](#text-algorithms)
-    - [Image Algorithms](#image-algorithms)
-    - [Video Algorithms](#video-algorithms)
-  - [👋 Awesome Data Evaluation](#awesome-data-evaluation)
 
 ## Module and Modality Support
 
-| Module\Modality     | Text | Image | Video | Image-Text Pair | Video-Text Pair |
+| Module\Modality     | Text | Image | Video | Image-Caption | Video-Caption |
 | ------------------- | ---- | ----- | ----- | --------------- | --------------- |
 | **Data Evaluation** | ✅    | ✅     | ✅     | ✅               | ✅               |
 
-## News
+## 新闻
 - [2024-12-27] 🎉 Our first data generation system is now open source.
 
-## Installation
+## 安装
 ```bash
 conda create -n dataflow-gen python=3.10 -y
 conda activate dataflow-gen
@@ -65,24 +56,22 @@ python run_pipeline.py --config configs/VideoCaption.yaml # Video Captioning
 python run_pipeline.py --config configs/VideoGeneration.yaml # Video Generation
 ```
 
-## Data Generation Documentation
+## 数据生成文档
 
 For the usage of evaluation, please refer to the following documents👇
 
-### Text Documentation
+### 文本模态
 
 - [Text Data Generation User Documentation (English)](./Dataflow-Gen/docs/text.md)
 - [文本数据生成使用文档 (中文)](./Dataflow-Gen/docs/text.zh-CN.md)
 
-### Image Documentation
+### 图像模态
 
 - [Image Data Generation User Documentation (English)](./Dataflow-Gen/docs/image.md)
 - [图像数据生成使用文档 (中文)](./Dataflow-Gen/docs/image.zh-CN.md)
 
-### Video Documentation
+### 视频模态
 
 - [Video Data Generation User Documentation (English)](./Dataflow-Gen/docs/video.md)
 - [视频数据生成使用文档 (中文)](./Dataflow-Gen/docs/video.zh-CN.md)
 
-## Awesome Data Generation
-- [👋 Awesome Data Generation](./Awesome_Data_Generation.md)
