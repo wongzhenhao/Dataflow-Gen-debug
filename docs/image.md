@@ -192,20 +192,19 @@ The pipeline supports various input formats, including CSV, TSV, Parquet, JSON, 
 For the input JSONL file, each line contains a JSON object describing a single data entry. Depending on the processing type, the JSON object should include the corresponding keys.
 
 **JSONL Format for Image Captioning**
-
+```
 {"image": "image1.jpg", "text": "A cat sitting on a windowsill."}
-
 {"image": "image2.png", "text": "A beautiful sunset over the mountains."}
-
 {"video": "video1.mp4", "text": "A timelapse of city traffic at night."}
+```
 
 **Key Fields Explanation**
 
-	•	**image**: The name of the image file.
+**image**: The name of the image file.
 	
-	•	**video**: The name of the video file.
+**video**: The name of the video file.
 	
-	•	**text**: The text description or prompt related to the image or video.
+**text**: The text description or prompt related to the image or video.
 
 For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
