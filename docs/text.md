@@ -1,18 +1,18 @@
 # Text Processing Pipeline
 
-### Table of Contents
+## Table of Contents
 
-- [Overview of Text Methods](#overview-of-text-methods)
-- [Usage Instructions](#usage-instructions)
-- [Input and Output Formats](#input-and-output-formats)
-- [Examples](#examples)
-- [Project Structure](#project-structure)
+- [Overview of Text Methods](#1-overview-of-text-methods)
+- [Usage Instructions](#2-usage-instructions)
+- [Input and Output Formats](#3-input-and-output-formats)
+- [Examples](#4-examples)
+- [Project Structure](#5-project-structure)
 
-### Overview of Text Methods
+## 1 Overview of Text Methods
 
 The text generation section mainly covers two categories of text generation algorithms: **API-based Text Generation** and **Local Model Text Generation**. The following details the specific models and functionalities of each method.
 
-**API-based Text Generation Methods**
+### API-based Text Generation Methods
 
 <table>
   <thead>
@@ -33,7 +33,7 @@ The text generation section mainly covers two categories of text generation algo
   </tbody>
 </table>
 
-**Local Model Text Generation Methods**
+### Local Model Text Generation Methods
 
 <table>
   <thead>
@@ -54,9 +54,9 @@ The text generation section mainly covers two categories of text generation algo
   </tbody>
 </table>
 
-### Usage Instructions
+## 2 Usage Instructions
 
-1. **Run the Pipeline**:
+### 2.1 Run the Pipeline
 
    Execute the entry script `run_pipeline.py`. This script runs the entire text generation pipeline based on the configuration file, including:
 
@@ -70,7 +70,7 @@ The text generation section mainly covers two categories of text generation algo
     python run_pipeline.py --config configs/TextGeneration.yaml
    ```
 
-2. **Configuration File**
+### 2.2 Configuration File
 
    The configuration file uses YAML format to define the pipeline's input, output, and the configuration for each step.
 
@@ -160,9 +160,9 @@ The text generation section mainly covers two categories of text generation algo
        prompt: "Please generate a detailed summary based on the following input."
    ```
 
-### Input and Output Formats
+## 3 Input and Output Formats
 
-**1. Input Format**
+### 3.1 Input Format
 
 Supports multiple input and output formats, including `csv`, `tsv`, `parquet`, `json`, and `jsonl` formats. The framework converts different input formats into a unified dictionary format for storage, and intermediate results are output in `jsonl` format. The following uses the `jsonl` format as an example.
 
@@ -180,11 +180,11 @@ For input JSONL files, each line contains a JSON object that describes a single 
 
 - **prompt**: The prompt used for text generation.
 
-**2. Output Format**
+### 3.2 Output Format
 
 The output will be saved in the `save_folder` specified in the configuration file and organized by step names.
 
-**3. Intermediate Results**
+### 3.3 Intermediate Results
 
 Intermediate results are saved in the `base_folder`, with each step creating a subfolder under this directory to store its output.
 
@@ -200,7 +200,7 @@ text_intermediate_results/
 │  ├── result.jsonl
 ```
 
-**4. Final Results**
+### 3.4 Final Results
 
 The final results will be saved in the `save_folder`, and the content will depend on the output of the last step. For example, if the last step is local model generation, the final results will include the generated text file.
 
@@ -209,9 +209,9 @@ results/
 ├── generated_texts.jsonl
 ```
 
-### Examples
+## 4 Examples
 
-1. **Prepare Data**
+### 4.1 Prepare Data
 
    Create a JSONL file containing text prompts, for example, `test_text_generation.jsonl`:
 
@@ -221,7 +221,7 @@ results/
    {"prompt": "Explain the basic principles of quantum computing."}
    ```
 
-2. **Run the Program**
+### 4.2 Run the Program
 
    Run the pipeline using the provided example configuration file `config.yaml`:
 
@@ -231,15 +231,15 @@ results/
    
    If using `APIGenerator`, make sure to load your API key into your environment variables first.
 
-3. **Run Process**
+### 4.3 Run Process
 
    The program first reads the JSONL file specified in the YAML configuration, then initializes the specified Generators. Each Generator combines the system prompt from the YAML configuration with the prompt from the JSONL file, sends it to the respective model to obtain a response, and then saves the response to the designated folder as specified in the YAML configuration.
 
-4. **View Results**
+### 4.4 View Results
 
    The generated texts will be saved in the `text_intermediate_results/` and `results/` directories.
 
-### Project Structure
+## 5 Project Structure
 
 ```
 TextGen-Project/
