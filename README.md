@@ -72,6 +72,6 @@ For the usage of evaluation, please refer to the following documents👇
 
 ### Video Documentation
 
-- [Video Data Generation User Documentation (English)](./Dataflow-Gen/docs/video.md)
+- [Video Data Generation User Documentation (English)](./docs/video.md)
 - [视频数据生成使用文档 (中文)](./docs/video.zh-CN.md)
 
