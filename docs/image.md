@@ -1,10 +1,10 @@
 # Image Processing Pipeline
 
 ## Table of Contents
-- [Image Methods Overview](#image-methods-overview)
-- [Usage](#1-usage)
-- [Input and Output Formats](#2-input-and-output-formats)
-- [Examples](#3-examples)
+- [Image Methods Overview](#1-image-methods-overview)
+- [Usage](#2-usage)
+- [Input and Output Formats](#3-input-and-output-formats)
+- [Examples](#4-examples)
 
 ### 1 Image Methods Overview
 
