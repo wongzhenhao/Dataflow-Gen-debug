@@ -161,21 +161,21 @@ steps:
 
 **配置参数说明**
 
-​	•	**meta_path**: 指向包含元数据的JSONL文件的路径。每行一个JSON对象，包含图像或视频的相关信息。
+**meta_path**: 指向包含元数据的JSONL文件的路径。每行一个JSON对象，包含图像或视频的相关信息。
 
-​	•	**meta_folder**: 图像或视频文件所在的文件夹路径。
+**meta_folder**: 图像或视频文件所在的文件夹路径。
 
-​	•	**base_folder**: 中间结果保存的根目录。
+**base_folder**: 中间结果保存的根目录。
 
-​	•	**save_folder**: 最终生成结果的保存目录。
+**save_folder**: 最终生成结果的保存目录。
 
-​	•	**image_key**: 元数据中表示图像路径的键。
+**image_key**: 元数据中表示图像路径的键。
 
-​	•	**text_key**: 元数据中表示文本内容的键。
+**text_key**: 元数据中表示文本内容的键。
 
-​	•	**video_key**: 元数据中表示视频路径的键。
+**video_key**: 元数据中表示视频路径的键。
 
-​	•	**steps**: 定义需要执行的步骤。每个步骤包含类型、名称和特定的配置。
+**steps**: 定义需要执行的步骤。每个步骤包含类型、名称和特定的配置。
 
 **添加新的生成步骤**
 
@@ -203,20 +203,19 @@ steps:
 对于输入的JSONL文件，每行包含一个JSON对象，描述单个数据项。根据不同的处理类型，JSON对象应包含相应的键。
 
 **生成方法对应的 JSONL 文件**
-
+```
 {"image": "image1.jpg", "text": "A cat sitting on a windowsill."}
-
 {"image": "image2.png", "text": "A beautiful sunset over the mountains."}
-
 {"video": "video1.mp4", "text": "A timelapse of city traffic at night."}
+```
 
 **关键字段说明**
 
-​	•	**image**: 图像文件的的名称。
+**image**: 图像文件的的名称。
 
-​	•	**video**: 视频文件的名称。
+**video**: 视频文件的名称。
 
-​	•	**text**: 与图像或视频相关的文本描述或提示。
+**text**: 与图像或视频相关的文本描述或提示。
 
 描述生成方法的格式与生成方法的格式类似，只需指明需要生成的描述的图片\视频在相应目录下的名称。
 
