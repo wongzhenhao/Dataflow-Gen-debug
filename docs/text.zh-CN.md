@@ -1,16 +1,13 @@
 # Text Processing Pipeline
 
-### 目录
+## 目录
+- [文本方法概览](#文本方法概览)
+- [使用方法](#使用方法)
+- [输入与输出格式](#输入与输出格式)
+- [示例](#示例)
+- [项目结构](#项目结构)
 
-- [Text Processing Pipeline](#text-processing-pipeline)
-    - [目录](#目录)
-    - [文本方法概览](#文本方法概览)
-    - [使用方法](#使用方法)
-    - [输入与输出格式](#输入与输出格式)
-    - [示例](#示例)
-    - [项目结构](#项目结构)
-
-### 文本方法概览
+## 1 文本方法概览
 
 文本生成部分主要涵盖两大类文本生成算法：**API文本生成**与**本地模型文本生成**。以下内容将详细介绍每类方法的具体模型、功能简介。
 
@@ -56,9 +53,9 @@
   </tbody>
 </table>
 
-### 使用方法
+## 2 使用方法
 
-1. **运行pipeline**:
+### 2.1 运行pipeline
 
    执行起始脚本 `run_pipeline.py`。此脚本根据配置文件运行整个文本生成pipeline，包括：
 
@@ -72,7 +69,7 @@
    python run_pipeline.py --config configs/TextGeneration.yaml
    ```
 
-2. **配置文件**
+### 2.2 配置文件
 
    配置文件采用 YAML 格式，用于定义pipeline的输入、输出以及各个步骤的配置。
 
@@ -162,9 +159,9 @@
        prompt: "Please generate a detailed summary based on the following input."
    ```
 
-### 输入与输出格式
+## 3 输入与输出格式
 
-**1. 输入格式**
+### 3.1 输入格式
 
 支持多种输入输出格式，包括csv、tsv、parquet、json、jsonl格式。框架会将不同输入格式转化为统一的字典进行存储，并且中间结果的输出格式为jsonl，以下以jsonl格式为例进行介绍。
 
@@ -182,12 +179,12 @@
 
 - **prompt**: 用于生成文本的提示语。
 
-**2. 输出格式**
+### 3.2 输出格式
 
 输出会保存到配置文件中指定的 `save_folder` 中，并按照步骤名称进行组织。
 
 
-**3. 中间结果**
+### 3.3 中间结果
 
 中间结果保存在 `base_folder` 中，每个步骤会在此目录下创建一个子文件夹来存储其输出。
 
@@ -203,7 +200,7 @@ text_intermediate_results/
 │  ├── result.jsonl
 ```
 
-**4. 最终结果**
+### 3.4 最终结果
 
 最终结果会保存在 `save_folder` 中，具体内容取决于最后一个步骤的输出。例如，若最后一个步骤是本地模型生成，最终结果包括生成的文本文件。
 
@@ -212,9 +209,9 @@ results/
 ├── generated_texts.jsonl
 ```
 
-### 示例
+## 4 示例
 
-1. **准备数据**
+### 4.1 准备数据
 
    创建一个包含文本提示的JSONL文件，例如 `test_text_generation.jsonl`：
 
@@ -224,7 +221,7 @@ results/
    {"prompt": "解释一下量子计算的基本原理。"}
    ```
 
-2. **运行程序**
+### 4.2 运行程序
 
    使用提供的示例配置文件 `config.yaml` 运行管道：
 
@@ -233,14 +230,14 @@ results/
    ```
    如果使用APIgenerator，请首先将您的APIkey加载到您的环境变量中。
 
-3. **运行过程**
+### 4.3 运行过程
    程序首先读取yaml文件中指定的JSONL文件，随后，启动yaml中指定的Generator，Generator组合yaml中的system prompt和JSONL文件中的prompt，传入相应的模型获得response，随后将response保存到yaml中指定的文件夹中。
 
-4. **查看结果**
+### 4.4 查看结果
 
    生成的文本将保存在 `text_intermediate_results/` 和 `results/` 目录中。
 
-### 项目结构
+## 5 项目结构
 
 ```
 TextGen-Project/
