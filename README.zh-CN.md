@@ -19,19 +19,19 @@ DataFlow-Gen是一个自动合成多模态数据的工具。 我们主要支持�
 
 我们目前支持文本，图像，视频三个模态。
 
-## Table of Contents
+## 目录
 - [DataFlow-Gen](#dataflow-gen)
   - [目录](#目录)
   - [支持的模态](#支持的模态)
   - [🔥 新闻](#新闻)
   - [🛠 安装](#安装)
-  - [🚀 Quick Start](#quick-start)
+  - [🚀 快速开始](#快速开始)
   - [📌 数据生成文档](#数据生成文档)
     - [Text Documentation](#text-documentation)
     - [Image Documentation](#image-documentation)
     - [Video Documentation](#video-documentation)
 
-## Module and Modality Support
+## 支持的模态
 
 | Module\Modality     | Text | Image | Video | Image-Caption | Video-Caption |
 | ------------------- | ---- | ----- | ----- | --------------- | --------------- |
@@ -46,7 +46,7 @@ conda create -n dataflow-gen python=3.10 -y
 conda activate dataflow-gen
 pip install -r requirements.txt
 ```
-## Quick Start
+## 快速开始
 ```
 cd path/to/DataFlow-Gen
 python run_pipeline.py --config configs/TextGeneration.yaml # Text Generation
