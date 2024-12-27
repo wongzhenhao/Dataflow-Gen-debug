@@ -19,7 +19,7 @@ DataFlow-Gen is a data generation system to generate high-quality data automatic
 We now support text, image, video, and multimodality data types.
 
 ## Table of Contents
-- [DataFlow-Eval](#dataflow-eval)
+- [DataFlow-Gen](#dataflow-gen)
   - [Table of Contents](#table-of-contents)
   - [Module and Modality Support](#module-and-modality-support)
   - [🔥 News](#news)
