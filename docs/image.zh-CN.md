@@ -230,36 +230,27 @@ steps:
 中间结果保存在base_folder中，每个步骤会在此目录下创建一个子文件夹来存储其输出。
 
 例如：
-
+```
 intermediate_results/
-
 ├── step_0_preprocess_format/
-
 │  ├── result.jsonl
-
 ├── step_1_ImageCaptioner_LLaVACaptioner/
-
 │  ├── result.jsonl
-
 ├── step_2_ImageGenerator_FLUXGenerator/
-
 │  ├── generated_images/
-
 │    ├── image1_generated.jpg
-
 │    ├── image2_generated.png
+```
 
 ### 3.4 最终结果
 
 最终结果会保存在save_folder中，具体内容取决于最后一个步骤的输出。例如，若最后一个步骤是图像生成，最终结果包括生成的图像文件。
-
+```
 results/
-
 ├── generated_images/
-
 │  ├── image1_generated.jpg
-
 │  ├── image2_generated.png
+```
 
 ## 4 示例
 
