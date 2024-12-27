@@ -257,11 +257,10 @@ results/
 ### 4.1 准备数据
 
 创建一个包含图像描述的JSONL文件，例如test_image_captioner.jsonl：
-
+```
 {"image": "images/cat.jpg", "text": "A cat sitting on a windowsill."}
-
 {"image": "images/sunset.png", "text": "A beautiful sunset over the mountains."}
-
+```
 ### 4.2 运行程序
 
 使用提供的示例配置文件config.yaml运行程序：
