@@ -2,13 +2,11 @@
 
 ### Table of Contents
 
-- [Text Processing Pipeline](#text-processing-pipeline)
-    - [Table of Contents](#table-of-contents)
-    - [Overview of Text Methods](#overview-of-text-methods)
-    - [Usage Instructions](#usage-instructions)
-    - [Input and Output Formats](#input-and-output-formats)
-    - [Examples](#examples)
-    - [Project Structure](#project-structure)
+- [Overview of Text Methods](#overview-of-text-methods)
+- [Usage Instructions](#usage-instructions)
+- [Input and Output Formats](#input-and-output-formats)
+- [Examples](#examples)
+- [Project Structure](#project-structure)
 
 ### Overview of Text Methods
 
