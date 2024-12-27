@@ -14,7 +14,7 @@
     <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/Open-DataFlow/Dataflow-Gen" />
 </a>
 
-DataFlow-Eval is a data generation system to generate high-quality data automatically. We mainly support SOTA algorithms within academic papers with strong theoretical support.
+DataFlow-Gen is a data generation system to generate high-quality data automatically. We mainly support SOTA algorithms within academic papers with strong theoretical support.
 
 We now support text, image, video, and multimodality data types.
 
