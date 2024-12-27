@@ -6,6 +6,7 @@
 - [使用方法](#2-使用方法)
 - [输入与输出格式](#3-输入与输出格式)
 - [示例](#4-示例)
+- [项目结构](#5-项目结构)
 
 ## 1 图片方法概览
 
@@ -270,3 +271,34 @@ python run_pipeline.py --config examples/image_demo.yaml
 ### 4.3 查看结果
 
 生成的图像和描述将保存在intermediate_results/和results/目录中。
+
+## 5 项目结构
+```
+Dataflow-Gen/
+├── data/
+│  ├── image/
+│  │  ├── test_image_captioner.jsonl
+│  │  ├── images/
+│  │    ├── cat.jpg
+│  │    ├── sunset.png
+│  ├── video/
+│    ├── video1.mp4
+├── intermediate_results/
+├── results/
+├── src/
+│  ├── config.py
+│  ├── pipeline/
+│  │  ├── manager.py
+│  │  ├── steps.py
+│  │  ├── wrappers.py
+│  ├── data/
+│    ├── DataManager.py
+│    ├── Dataset.py
+│  ├── utils/
+│    ├── data_utils.py
+│    ├── registry.py
+├── run_pipeline.py
+├── requirements.txt
+├── config.yaml
+├── README.md
+```
