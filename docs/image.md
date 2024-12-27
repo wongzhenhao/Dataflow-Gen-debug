@@ -1,14 +1,103 @@
 # Image Processing Pipeline
 
 ## Table of Contents
-
+- [Image Methods Overview](#image-methods-overview)
 - [Usage](#1-usage)
 - [Input and Output Formats](#2-input-and-output-formats)
 - [Examples](#3-examples)
 
-## 1 Usage
+### 1 Image Methods Overview
 
-### 1.1 Running the Pipeline
+This section covers two main categories of image processing algorithms: **Image Captioning** and **Image Generation**. Below are the detailed descriptions of each method, including model and functionality.
+
+**Image Captioning Methods**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Model HuggingFace Path</th>
+      <th>Description</th>
+      <th>Official Repository or Paper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BLIPCaptioner</td>
+      <td>Salesforce/blip2-opt-2.7b</td>
+      <td>Generates image captions using the BLIP2 model based on QFormer, widely used for datasets like LLaVA Pretrain 558.</td>
+      <td><a href="https://github.com/salesforce/LAVIS/tree/main/projects/blip2">Code</a><br><a href="https://arxiv.org/abs/2301.12597">Paper</a></td>
+    </tr>
+    <tr>
+      <td>LLaVACaptioner</td>
+      <td>llava-hf/llava-1.5-7b-hf</td>
+      <td>Generates image captions using the LLaVA model, suitable for simpler tasks.</td>
+      <td><a href="https://github.com/haotian-liu/LLaVA">Code</a><br><a href="https://arxiv.org/abs/2304.08414">Paper</a></td>
+    </tr>
+    <tr>
+      <td>LLaVANeXTCaptioner</td>
+      <td>llava-hf/llava-v1.6-mistral-7b-hf</td>
+      <td>Uses LLaVA-NeXT with dynamic resolution, improving the ability to generate semantically complex image captions.</td>
+      <td><a href="https://github.com/LLaVA-VL/LLaVA-NeXT">Code</a><br><a href="https://llava-vl.github.io/blog/2024-01-30-llava-next/">Blog</a></td>
+    </tr>
+    <tr>
+      <td>LLaVAOneVisionCaptioner</td>
+      <td>llava-hf/llava-onevision-qwen2-7b-ov-hf</td>
+      <td>Optimized for vision processing using the OneVision version of the LLaVA model, trained on large datasets.</td>
+      <td><a href="https://github.com/LLaVA-VL/LLaVA-NeXT">Code</a><br><a href="https://arxiv.org/abs/2408.03326">Paper</a></td>
+    </tr>
+    <tr>
+      <td>MLLamaCaptioner</td>
+      <td>meta-llama/Llama-3.2-11B-Vision-Instruct</td>
+      <td>Generates image captions using Meta's LLaMA Vision model, supporting high-parallelism captioning.</td>
+      <td><a href="https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/">Official Site</a></td>
+    </tr>
+    <tr>
+      <td>Phi3VCaptioner</td>
+      <td>microsoft/Phi-3-vision-128k-instruct</td>
+      <td>Based on Microsoft's Phi-3 model, specializing in high-quality instruction-based image captioning.</td>
+      <td><a href="https://github.com/microsoft/Phi-3CookBook">Code</a><br><a href="https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/">Official Site</a><br><a href="https://arxiv.org/abs/2404.14219">Paper</a></td>
+    </tr>
+    <tr>
+      <td>QwenVLCaptioner</td>
+      <td>Qwen/Qwen2-VL-7B-Instruct</td>
+      <td>Generates image captions based on the Qwen2 model, supporting multi-turn conversational captioning.</td>
+      <td><a href="https://github.com/QwenLM/Qwen2.5">Code</a><br><a href="https://arxiv.org/abs/2407.10671">Paper</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+**Image Generation Methods**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Model HuggingFace Path</th>
+      <th>Description</th>
+      <th>Official Repository or Paper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FLUXGenerator</td>
+      <td>black-forest-labs/FLUX.1-dev</td>
+      <td>Generates high-resolution images based on the Flux implementation, with strong instruction-following capabilities.</td>
+      <td><a href="https://github.com/black-forest-labs/flux">Code</a></td>
+    </tr>
+    <tr>
+      <td>StableDiffusionGenerator</td>
+      <td>stabilityai/stable-diffusion-3.5-large</td>
+      <td>Generates high-quality, detailed images based on Stable Diffusion 3, with fast inference.</td>
+      <td><a href="https://github.com/Stability-AI/StableDiffusion">Code</a><br><a href="https://arxiv.org/abs/2112.10752">Paper</a></td>
+    </tr>
+  </tbody>
+</table>
+
+## 2 Usage
+
+### 2.1 Running the Pipeline
 
 The pipeline is initiated by running the script `run_pipeline.py`. This script executes the entire image processing pipeline based on the configuration file, which includes:
 
@@ -16,13 +105,13 @@ The pipeline is initiated by running the script `run_pipeline.py`. This script e
 - **Model Inference**: Runs the model steps as defined in the YAML configuration file.
 - **Postprocessing**: Converts the output from model inference into the final required format.
 
-### 1.2 Command-line Execution
+### 2.2 Command-line Execution
 
 ```bash
 python run_pipeline.py --config configs/ImageCaption.yaml
 ```
 
-### 1.3 Configuration File
+### 2.3 Configuration File
 
 The configuration file is written in YAML format and defines the pipeline’s inputs, outputs, and each processing step.
 
@@ -94,9 +183,9 @@ To add a new processing step, simply add the corresponding configuration in the 
   batch_size: 1
 ```
 
-## 2 Input and Output Formats
+## 3 Input and Output Formats
 
-### 2.1 Input Format
+### 3.1 Input Format
 
 The pipeline supports various input formats, including CSV, TSV, Parquet, JSON, and JSONL. The framework will convert different input formats into a unified dictionary for storage, and the intermediate output format is JSONL. Below is an explanation based on the JSONL format.
 
@@ -120,13 +209,13 @@ For the input JSONL file, each line contains a JSON object describing a single d
 
 For the captioning methods, the format is similar; you simply need to specify the image/video name for which the description is to be generated.
 
-### 2.2 Output Format
+### 3.2 Output Format
 
 The output format depends on the steps executed. Typically, results are saved in the folder specified by save_folder in the configuration file, and they are organized by step name.
 
 For caption generation methods, the generated results are saved in the JSONL file under the user-specified key (e.g., ‘text’), while for image generation methods, the images/videos are stored in the specified directory.
 
-### 2.3 Intermediate Results
+### 3.3 Intermediate Results
 
 Intermediate results are stored in the base_folder. Each step creates a subfolder under this directory to store its outputs.
 
@@ -142,7 +231,7 @@ intermediate_results/
 │    ├── image1_generated.jpg
 │    ├── image2_generated.png
 ```
-### 2.4 Final Results
+### 3.4 Final Results
 
 The final results are stored in the save_folder. The content depends on the output of the last step. For example, if the last step is image generation, the final results will include the generated image files.
 
@@ -154,9 +243,9 @@ results/
 │  ├── image2_generated.png
 ```
 
-## 3 Examples
+## 4 Examples
 
-### 3.1 Prepare Data
+### 4.1 Prepare Data
 
 Create a JSONL file with image captions, for example, test_image_captioner.jsonl:
 
@@ -164,13 +253,13 @@ Create a JSONL file with image captions, for example, test_image_captioner.jsonl
 
 {"image": "images/sunset.png", "text": "A beautiful sunset over the mountains."}
 
-### 3.2 Run the Pipeline
+### 4.2 Run the Pipeline
 
 Use the provided sample configuration file config.yaml to run the pipeline:
 ```bash
 python run_pipeline.py --config configs/ImageCaption.yaml
 ```
-### 3.3 View Results
+### 4.3 View Results
 
 The generated images and captions will be saved in the intermediate_results/ and results/ directories.
 
