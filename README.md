@@ -62,16 +62,16 @@ For the usage of evaluation, please refer to the following documents👇
 
 ### Text Documentation
 
-- [Text Data Generation User Documentation (English)](./Dataflow-Gen/docs/text.md)
-- [文本数据生成使用文档 (中文)](./Dataflow-Gen/docs/text.zh-CN.md)
+- [Text Data Generation User Documentation (English)](./docs/text.md)
+- [文本数据生成使用文档 (中文)](./docs/text.zh-CN.md)
 
 ### Image Documentation
 
-- [Image Data Generation User Documentation (English)](./Dataflow-Gen/docs/image.md)
-- [图像数据生成使用文档 (中文)](./Dataflow-Gen/docs/image.zh-CN.md)
+- [Image Data Generation User Documentation (English)](./docs/image.md)
+- [图像数据生成使用文档 (中文)](./docs/image.zh-CN.md)
 
 ### Video Documentation
 
 - [Video Data Generation User Documentation (English)](./Dataflow-Gen/docs/video.md)
-- [视频数据生成使用文档 (中文)](./Dataflow-Gen/docs/video.zh-CN.md)
+- [视频数据生成使用文档 (中文)](./docs/video.zh-CN.md)
 
