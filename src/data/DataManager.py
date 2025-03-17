@@ -50,9 +50,9 @@ class DataManager:
         :return: Path to the saved JSONL file
         """
         file_path = os.path.join(folder, filename)
-        with open(file_path, 'w') as f:
+        with open(file_path, 'w', encoding="utf-8") as f:
             for item in data:
-                f.write(json.dumps(item) + '\n')
+                f.write(json.dumps(item, ensure_ascii=False) + '\n')
         logging.info(f"Saved {len(data)} items to {file_path}")
         return file_path
 
